@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/07/29 21:09:03 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/07/29 22:03:05 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ t_node	*command_line(char *line);
 // parsing_error_handler.c
 int		error_handliing(char **curpus);
 void	free_corpus(char **curpus);
+void	free_token(t_node **node);
 
 #endif PARSING_H

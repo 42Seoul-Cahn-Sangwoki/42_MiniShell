@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:49:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/07/29 21:10:30 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/07/29 22:00:59 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,11 @@ t_node	*command_line(char *line)
 	pipex_counter = pipex_count(line);
 	token = init_token(pipex_counter, line);
 	if (token == 0)
-		return (0);
-	if (tokenizer(pipex_counter, line, &token) == FALSE)
 		return (FALSE);
-	
+	if (tokenizer(pipex_counter, line, &token) == FALSE)
+	{
+		free_token(&token);
+		return (FALSE);
+	}
+	return (token);
 }
