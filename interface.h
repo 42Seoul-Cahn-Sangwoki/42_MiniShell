@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/07/30 17:42:19 by cahn             ###   ########.fr       */
+/*   Updated: 2023/07/30 18:11:20 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@
 # include <readline/history.h>
 # include <signal.h>
 
+#define COMMAND 1
+#define HEREDOC 2
+
 typedef struct s_node
 {
     char            **commands;
+    int             state;
     int             idx;
     struct s_node	*next;
 }   t_node;
