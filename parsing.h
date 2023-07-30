@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/07/29 22:03:05 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/07/30 15:03:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 # define PARSING_H
 
 # include "libft/libft.h"
-# include <signal.h>
 # include <termios.h>
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 
 # define FALSE 0
 # define TRUE 1
@@ -26,15 +23,15 @@
 # include"base.h"
 
 // tokenizer.c
-int		is_whitespace(char *line);
 int		pipex_count(char *line);
-t_node	*init_token(int pipex_counter, char *line);
+t_node	*init_token(int pipex_counter);
 int		tokenizer(int pipex_couter, char *line, t_node **node);
 t_node	*command_line(char *line);
+int		is_whitespace(char *line);
 
 // parsing_error_handler.c
-int		error_handliing(char **curpus);
+int		error_handling(char **curpus);
 void	free_corpus(char **curpus);
 void	free_token(t_node **node);
 
-#endif PARSING_H
+#endif
