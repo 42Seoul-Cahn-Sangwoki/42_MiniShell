@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:53:04 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/07/29 20:00:26 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/07/30 16:01:02 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"base.h"
+#include "../base.h"
 
 int	execute(char *line)
 {
-	t_node	*node_pool;
+	
 
 	
 }
