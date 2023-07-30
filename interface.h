@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/07/30 16:56:51 by cahn             ###   ########.fr       */
+/*   Updated: 2023/07/30 17:38:31 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,7 @@ typedef struct s_node
 }   t_node;
 
 void    execute(t_node *cmds, int length); // 배열과 배열 크기
+void	print_stderr(char *error_print);
+void	non_valid_error(char *error_print);
+
 #endif
