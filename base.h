@@ -23,8 +23,6 @@
 
 # define FALSE 0
 # define TRUE 1
-# define CMD 0
-# define OPTION 1
 
 typedef struct s_state
 {
@@ -35,7 +33,7 @@ typedef struct s_state
 // command[0] == cmd, command[1] == option
 typedef struct s_node
 {
-	char			*command[2];
+	char			**command;
 	int				idx;
 	t_state			state;
 	struct s_node	*next;
