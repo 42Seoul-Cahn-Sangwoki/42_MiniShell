@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:26:47 by cahn              #+#    #+#             */
-/*   Updated: 2023/07/30 17:47:11 by cahn             ###   ########.fr       */
+/*   Updated: 2023/07/31 18:22:55 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,31 @@ char	*find_path()
 	return (NULL);
 }
 
+int	token_processing(t_node *token)
+{
+	
+}
+
 void    execute(t_node *cmds, int length)
 {
-    char    *path_list;
-    int     i;
+	int			i;
+	int			*child_pid_array;
+	int			**my_pipe;
 
-    path_list = find_path();
-    if (path_list == NULL)
-        non_valid_error("PATH");
-    
+	i = 0;
+	child_pid_array = (int *)malloc(sizeof(int) * length);
+	if (!child_pid_array)
+		print_stderr("Malloc");
+	my_pipe = (int **)malloc(sizeof(int *) * length);
+	if (!my_pipe)
+		print_stderr("Malloc");
+	
+	while (i < length)
+	{
+
+		child_pid_array[i] = fork();
+		if (child_pid_array[i] == -1)
+			print_stderr("fork");
+		//
+	}
 }
