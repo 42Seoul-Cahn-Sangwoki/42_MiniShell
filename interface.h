@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/07/31 17:39:59 by cahn             ###   ########.fr       */
+/*   Updated: 2023/07/31 18:25:24 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@
 # include <readline/history.h>
 # include <signal.h>
 
+#define WRITE_NEW 0
+#define WRITE_BACK 1
+#define READ -1
+
 typedef struct s_file_info
 {
     char                *file_name; // Null 이면 fd값 확인
     int                 fd;
+    int                 write_mode; // 여기 매크로값 넣어주셈 (> 이거는 0, >> 이거는 1, inputfile이면 -1)
     struct s_file_info  *next;
 }   t_file_info;
 
