@@ -6,32 +6,45 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:03:41 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/01 17:47:57 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "libft/libft.h"
 # include <termios.h>
 # include <stdio.h>
 
 # define FALSE 0
 # define TRUE 1
 
-# include"base.h"
+# include"../interface.h"
+
+// preprocessing.c
+int			is_whitespace(char *line);
+int			pipex_count(char *line);
+t_node		**init_token(int pipex_counter);
 
 // tokenizer.c
-int		pipex_count(char *line);
-t_node	*init_token(int pipex_counter);
-int		tokenizer(int pipex_couter, char *line, t_node **node);
-t_node	*command_line(char *line);
-int		is_whitespace(char *line);
+t_node		**token2corpus(int pipex_counter, char *line);
+t_node		**command_line(char *line, int *length);
+// char	**tokenizer(int str, int end, t_node *token);
 
-// parsing_error_handler.c
-int		error_handling(char **curpus);
-void	free_corpus(char **curpus);
-void	free_token(t_node **node);
+// parsing_error.c
+int			error_handling(int count, char **corpus);
+
+// parsing_free.c
+void		free_corpus(char **curpus);
+
+// utitlity.c
+int			normalize_redirect(char *dup, char *command);
+void		ft_push_back(t_file_info **head, t_file_info **node);
+t_file_info	*get_info(char *file_name, int write_mode);
+
+// extract_feature.c
+char		**extract_command(char **command, int length);
+t_file_info	*extract_infile(char **command);
+t_file_info	*extract_outfile(char **command);
 
 #endif

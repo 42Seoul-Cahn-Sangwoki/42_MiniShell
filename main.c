@@ -6,19 +6,58 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/07/29 19:55:21 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:05:05 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"base.h"
+#include"parsing/parsing.h"
 
-char	*g_envp;
+char	**g_envp;
+
+void	execute(t_node	**token, int length)
+{
+	t_file_info	*head1;
+	t_file_info	*head2;
+	char		**command;
+	int			i;
+	int			j;
+
+	// printf("length: %d\n", length);
+	i = 0;
+	while (i < length)
+	{
+		j = 0;
+		command = token[i]->commands;
+		while (command[j])
+		{
+			printf("commands: [%s]\n", command[j]);
+			j++;
+		}
+		head1 = token[i]->infile_head;
+		while (head1 && head1->next)
+		{
+			printf("[%s %d]\n", head1->file_name, head1->write_mode);
+			head1 = head1->next;
+		}
+		head2 = token[i]->outfile_head;
+		while (head2 && head2->next)
+		{
+			printf("[%s %d]\n", head2->file_name, head2->write_mode);
+			head2 = head2->next;
+		}
+		i++;
+	}
+}
 
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
+	t_node	**token;
+	int		length;
 
 	g_envp = envp;
+	argc = 0;
+	argv = 0;
 	// 
 	// signal part
 	//
@@ -31,9 +70,11 @@ int	main(int argc, char *argv[], char *envp[])
 			add_history(line);
 		if (line[0] != '\0' && !is_whitespace(line))
 		{
-			// execute
+			token = command_line(line, &length);
+			execute(token, length);
 		}
 		free(line);
+		// free_token(token);
 	}
 	return (0);
 }

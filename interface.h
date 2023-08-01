@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/01 15:57:14 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/01 17:11:36 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_node
 	t_file_info		*outfile_head;
 }	t_node;
 
-void	execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭 리턴)
+// void	execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭 리턴)
 void	print_stderr(char *error_print);
 void	non_valid_error(char *error_print);
 

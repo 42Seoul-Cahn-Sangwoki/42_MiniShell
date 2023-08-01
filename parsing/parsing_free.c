@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   parsing_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/29 19:53:04 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/07/29 20:00:26 by sangwoki         ###   ########.fr       */
+/*   Created: 2023/07/30 15:02:03 by sangwoki          #+#    #+#             */
+/*   Updated: 2023/08/01 14:39:34 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"base.h"
+#include"parsing.h"
 
-int	execute(char *line)
+void	free_corpus(char **curpus)
 {
-	t_node	*node_pool;
+	int	i;
 
-	
+	i = 0;
+	while (curpus[i])
+	{
+		free(curpus[i]);
+		i++;
+	}
+	free(curpus);
 }
