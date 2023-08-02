@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:26:47 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/02 20:20:59 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/02 20:22:11 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	token_processing(t_node *token, int *pipe, int index, int length)
 		print_stderr("Commands not found");
 	free(path);
 	execve(token->commands[0], token->commands, g_envp);
+	print_stderr("execve");
 }
 
 void    execute(t_node *cmds, int length)
