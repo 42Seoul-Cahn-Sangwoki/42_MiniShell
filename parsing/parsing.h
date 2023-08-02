@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/01 17:47:57 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:25:42 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ t_node		**command_line(char *line, int *length);
 // char	**tokenizer(int str, int end, t_node *token);
 
 // parsing_error.c
-int			error_handling(int count, char **corpus);
-
+int			error_handling(char **corpus);
+int			error_symbol(char *command);
+int			error_bracket(char *command);
 // parsing_free.c
 void		free_corpus(char **curpus);
 

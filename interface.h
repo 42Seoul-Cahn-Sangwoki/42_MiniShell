@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/01 17:11:36 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:44:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 # define INTERFACE_H
 
 # include "libft/libft.h"
-# include <signal.h>
-# include <termios.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <signal.h>
 
 # define WRITE_NEW 0
 # define WRITE_BACK 1

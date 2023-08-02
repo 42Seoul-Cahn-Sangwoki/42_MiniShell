@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:49:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/01 18:02:00 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/01 20:18:15 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_node	*tokenizer(char *norm_command)
 	char	**vector;
 	t_node	*token;
 
-	printf("tokenizer cmd: [%s]\n", norm_command);
 	token = (t_node *)malloc(sizeof(t_node));
 	vector = ft_split(norm_command, ' ');
 	token->commands = extract_command(vector, ft_strlen(norm_command));
@@ -63,13 +62,14 @@ t_node	**token2corpus(int pipex_counter, char *line)
 	t_node	**token;
 
 	corpus = ft_split(line, '|');
-	if (error_handling(pipex_counter + 1, corpus) == TRUE)
+	if (error_handling(corpus) == TRUE)
 		return (FALSE);
 	token = init_token(pipex_counter);
-	// (', ") handle code...
 	i = 0;
 	while (i < pipex_counter + 1)
 	{
+		// (', ") handle code...
+		// handle_quote(corpus[i])
 		token[i] = tokenizer(normalize(corpus[i]));
 		i++;
 	}

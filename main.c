@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/01 18:05:05 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/02 18:23:09 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ int	main(int argc, char *argv[], char *envp[])
 	g_envp = envp;
 	argc = 0;
 	argv = 0;
-	// 
-	// signal part
-	//
+	// set_signal_terminal(argc, argv);
 	while (1)
 	{
 		line = readline(" $>");
@@ -71,6 +69,8 @@ int	main(int argc, char *argv[], char *envp[])
 		if (line[0] != '\0' && !is_whitespace(line))
 		{
 			token = command_line(line, &length);
+			if (token == 0)
+				break ;
 			execute(token, length);
 		}
 		free(line);

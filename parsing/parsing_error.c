@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/01 17:31:39 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:49:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	error_bracket(char *command)
 			i++;
 		while (j >= 0 && (command[j] != '\'' && command[j] != '\"'))
 			j--;
-		if ((j >= 0 && command[i] != command[j]) || i == j)
+		if ((j >= 0 && command[i] != command[j]))
 			failure = TRUE;
 		i++;
 		j--;
@@ -53,27 +53,18 @@ int	error_bracket(char *command)
 	return (failure == TRUE);
 }
 
-int	error_handling(int max_count, char **corpus)
+int	error_handling(char **corpus)
 {
 	int		i;
-	int		j;
-	char	**commands;
 	int		failure;
 
 	i = 0;
 	failure = FALSE;
 	while (corpus[i] && failure == FALSE)
 	{
-		commands = ft_split(corpus[i], ' ');
-		j = 0;
-		while (commands[j])
-		{
-			if (error_bracket(commands[j]) || error_symbol(commands[j]))
-				failure = TRUE;
-			j++;
-		}
+		if (error_bracket(corpus[i]) || error_symbol(corpus[i]))
+			failure = TRUE;
 		i++;
 	}
-	max_count = 0; // 
 	return (failure);
 }
