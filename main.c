@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/02 22:29:18 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/02 22:47:15 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,17 @@ void	execute(t_node	**token, int length)
 			j++;
 		}
 		head1 = token[i]->infile_head;
-		while (head1)
+		while (head1 && head1->next)
 		{
 			printf("[%s %d]\n", head1->file_name, head1->write_mode);
 			head1 = head1->next;
 		}
 		head2 = token[i]->outfile_head;
-		while (head2)
+		while (head2 && head2->next)
 		{
 			printf("[%s %d]\n", head2->file_name, head2->write_mode);
 			head2 = head2->next;
 		}
-		printf("\n\n\n\n");
 		i++;
 	}
 }
