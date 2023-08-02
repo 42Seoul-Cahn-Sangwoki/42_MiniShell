@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/01 19:25:42 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/02 22:18:54 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			error_bracket(char *command);
 void		free_corpus(char **curpus);
 
 // utitlity.c
-int			normalize_redirect(char *dup, char *command);
+int         normalize_redirect(char *dup, char *command, int *is_mode);
 void		ft_push_back(t_file_info **head, t_file_info **node);
 t_file_info	*get_info(char *file_name, int write_mode);
 

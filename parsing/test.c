@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:36:44 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/01 17:10:42 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/02 22:19:06 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	main(void)
 
 	tmp = ">>infile1 >infile2 <outfile1 <<outfile2 >infile3 <outfile3 >infile4 <<outfile4";
 	vector = ft_split(tmp, ' ');
-	head1 = extract_infile(vector, ft_strlen(tmp));
+	head1 = extract_infile(vector);
 	while (head1->next)
 	{
 		printf("%s %d\n", head1->file_name, head1->write_mode);
 		head1 = head1->next;
 	}
 	printf("\n\n\n");
-	head2 = extract_outfile(vector, ft_strlen(tmp));
+	head2 = extract_outfile(vector);
 	while (head2->next)
 	{
 		printf("%s %d\n", head2->file_name, head2->write_mode);

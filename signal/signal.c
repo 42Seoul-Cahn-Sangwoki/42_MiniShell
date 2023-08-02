@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:43:41 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/02 18:23:05 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:30:15 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // not print -> SIGQUIT: "^\", print -> SIGQUIT: "^\Quit: 3\n"
 void	sig_handler(int signum)
 {
-	if (signum == SIGINT && getpid() == -1)
+	if (signum == SIGINT && getpid() == 0)
 	{
 		signal(SIGTERM, SIG_DFL);
 		printf("\n");

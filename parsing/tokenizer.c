@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:49:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/01 20:18:15 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/02 22:25:11 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,23 @@ char	*normalize(char *command)
 
 	dup = (char *)malloc(sizeof(char) * (ft_strlen(command) * 2));
 	i = 0;
-	j = 0;
+	j = -1;
 	while (command[i])
 	{
+		j++;
 		while (command[i] && command[i] == ' ')
 			i++;
-		is_mode = normalize_redirect(&dup[j], &command[i]);
-		while (command[i] && command[i] != ' ' && is_mode == 0)
+		i += normalize_redirect(&dup[j], &command[i], &is_mode);
+		j += is_mode;
+		while (command[i] && command[i] != ' ')
 		{
 			ft_strlcpy(&dup[j], &command[i], 2);
 			j++;
 			i++;
 		}
-		dup[j + is_mode] = ' ';
-		j = j + is_mode + 1;
-		i = i + is_mode;
+		dup[j] = ' ';
 	}
+	dup[j] = 0;
 	return (dup);
 }
 
