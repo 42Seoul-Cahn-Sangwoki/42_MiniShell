@@ -52,3 +52,21 @@ char	*find_path(char **envp)
 	}
 	return (NULL);
 }
+
+int	check_and_create_file_by_write(char *file_name)
+{
+	int	fd;
+
+	if (!access(file_name, F_OK))
+	{
+		if (access(file_name, W_OK))
+			return (RETURN_ERROR);
+		else
+			return (RETURN_NORMAL);
+	}
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 00777);
+	if (fd < 0)
+		print_stderr(file_name);
+	close(fd);
+	return (RETURN_NORMAL);
+}

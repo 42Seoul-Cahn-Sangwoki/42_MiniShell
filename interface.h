@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/07/31 19:54:29 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/02 18:32:11 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #define WRITE_NEW 0
 #define WRITE_BACK 1
 #define READ -1
+#define HERE_DOC -2
 
 typedef struct s_file_info
 {
