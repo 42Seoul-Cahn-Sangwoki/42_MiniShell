@@ -24,7 +24,6 @@
 #define WRITE_NEW 0
 #define WRITE_BACK 1
 #define READ -1
-#define HERE_DOC -2
 
 typedef struct s_file_info
 {
