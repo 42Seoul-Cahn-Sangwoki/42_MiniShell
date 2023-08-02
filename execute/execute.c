@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:26:47 by cahn              #+#    #+#             */
-/*   Updated: 2023/07/31 20:51:05 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/02 20:20:59 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,57 @@ int	return_redirection_fd(t_file_info *head)
 	return (open(head->file_name, O_WRONLY | O_CREAT | O_APPEND, 00777));
 }
 
+void	find_execute_file(char **commands, char *path)
+{
+	char	**split;
+	int		i;
+	char	*tmp;
+	char	*res;
+	
+	split = ft_split(path, ':');
+	i = -1;
+	while (split[++i])
+	{
+		tmp = ft_strjoin(split[i], "/");
+		res = ft_strjoin(tmp, commands[0]);
+		free(tmp);
+		if (!access(res, X_OK))
+		{
+			free_split(&split);
+			free(commands[0]);
+			commands[0] = res;
+			return ;
+		}
+		free(res);
+	}
+	free_split(&split);
+	free(commands[0]);
+	commands[0] = NULL;
+}
+
 int	token_processing(t_node *token, int *pipe, int index, int length)
 {
-	int	input_fd;
-	int	output_fd;
+	int		input_fd;
+	int		output_fd;
+	char	*path;
 
 	input_fd = return_redirection_fd(token->infile_head);
 	output_fd = return_redirection_fd(token->outfile_head);
-	
+	if (input_fd != -1)
+		dup2(input_fd, 0);
+	else
+		dup2(pipe[0], 0);
+	if (output_fd != -1)
+		dup2(output_fd, 1);
+	else if (index < length - 1)
+		dup2(pipe[1], 1);
+	path = find_path(g_envp);
+	if (access(token->commands[0], X_OK))	
+		find_execute_file(token->commands, path);
+	if (token->commands[0] == NULL)
+		print_stderr("Commands not found");
+	free(path);
+	execve(token->commands[0], token->commands, g_envp);
 }
 
 void    execute(t_node *cmds, int length)
