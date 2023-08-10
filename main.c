@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/02 22:29:18 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:20:02 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char *argv[], char *envp[])
 		if (line == 0)
 			break ;
 		if (line[0] != '\0')
-			add_history(line);
+			add_history(&line[ft_strlen(" $>")]);
 		if (line[0] != '\0' && !is_whitespace(line))
 		{
 			token = command_line(line, &length);

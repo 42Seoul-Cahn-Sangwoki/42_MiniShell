@@ -1,0 +1,1 @@
+gcc ../libft/ft_strlen.c ../libft/ft_split.c extract_feature.c test.c ../libft/ft_strlcpy.c ../libft/ft_strncmp.c utility.c ../libft/ft_strdup.c

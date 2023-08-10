@@ -6,7 +6,7 @@
 #    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/01 16:54:16 by sangwoki         ###   ########.fr        #
+#    Updated: 2023/08/03 11:54:00 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ INCS = interface.h \
 all : $(NAME)
 $(NAME) : $(OBJS)
 	make -C ./libft all
-	$(CC) $(CFLAGS) -lreadline $^ $(LIBFT) -o $@
+	$(CC) $(CFLAGS) -lreadline $^ $(LIBFT) -o $@ㅇ
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 clean :

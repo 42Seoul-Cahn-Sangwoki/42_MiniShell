@@ -6,46 +6,59 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:43:41 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/02 19:30:15 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:51:36 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"signal.h"
 
-// not print -> SIGQUIT: "^\", print -> SIGQUIT: "^\Quit: 3\n"
-void	sig_handler(int signum)
+int	g_exit;
+
+void	exit_status(int code)
 {
-	if (signum == SIGINT && getpid() == 0)
-	{
-		signal(SIGTERM, SIG_DFL);
-		printf("\n");
-		return ;
-	}
+	
+}
+
+void	handler(int signum)
+{
+	char	ch;
+	int		ret;
+
+	ret = read(STDIN_FILENO, &ch, 1);
 	if (signum == SIGINT)
-		printf("^C\n");
+	{
+		// exit_status(256 * EXIT_FAILURE);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 	else if (signum == SIGQUIT)
 	{
-		
+		// exit_status(256 * EXIT_FAILURE);
+		if (ret != 0)
+			ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
-	exit(0);
 }
 
-void	init_signal(void)
+void	execute_signal(void)
 {
-	struct sigaction	sa;
-
-	sa.sa_handler = sig_handler;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	if (sigaction(SIGINT, &sa, 0) == -1 || sigaction(SIGQUIT, &sa, 0) == -1 \
-	|| sigaction(SIGTERM, &sa, 0) == -1)
-	{
-		perror("Error setting up sigaction");
-		return (1);
-	}
+	term_echo_on();
+	signal(SIGINT, handler);
+	signal(SIGQUIT, handler);
 }
 
-void	init_terminal(void)
+void	default_signal(void)
+{
+	term_echo_off();
+	signal(SIGINT, handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	term_echo_off(void)
 {
 	struct termios	term;
 
@@ -54,10 +67,35 @@ void	init_terminal(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-void	set_signal_terminal(int argc, char *argv[])
+void	term_echo_on(void)
 {
-	argc = 0;
-	argv = 0;
-	init_signal();
-	init_terminal();
+	struct termios	term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag |= ECHO;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
+
+int	main(void)
+{
+	pid_t	child_pid;
+	char	*line;
+
+	default_signal();
+	while (1)
+	{
+		line = readline(" $>");
+		if (line == 0)
+		{
+			printf("exit\n");
+			break ;
+		}
+		execute_signal();
+		// child_pid = fork();
+		// if (child_pid == 0)
+		// 	set_signal(child_handler);
+		sleep (100);
+	}
+	return (0);
+}
+

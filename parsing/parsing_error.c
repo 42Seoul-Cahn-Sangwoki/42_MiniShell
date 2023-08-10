@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/02 22:29:56 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:54:29 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 // signal error: 
 
 // parsing error: \, ;, ', "
-
-// <<, <, >, >> 연속일 경우 예외처리 해야 한다.
 
 int	error_symbol(char *command)
 {
