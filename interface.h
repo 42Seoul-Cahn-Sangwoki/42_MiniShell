@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   interface.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/02 19:00:52 by sangwoki         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef INTERFACE_H
 # define INTERFACE_H
@@ -44,5 +33,6 @@ typedef struct s_node
 void    execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭 리턴)
 void	print_stderr(char *error_print);
 void	non_valid_error(char *error_print);
+void	free_split(char ***split);
 
 #endif
