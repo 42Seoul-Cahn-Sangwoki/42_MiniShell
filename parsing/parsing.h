@@ -19,7 +19,7 @@
 # define FALSE 0
 # define TRUE 1
 
-# include"../interface.h"
+# include "../interface.h"
 
 // preprocessing.c
 int			is_whitespace(char *line);

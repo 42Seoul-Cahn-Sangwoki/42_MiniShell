@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
+#    By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/01 16:54:16 by sangwoki         ###   ########.fr        #
+#    Updated: 2023/08/02 20:49:18 by cahn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,14 @@ SRCS = 	./main.c \
 		./parsing/extract_feature.c \
 		./parsing/parsing_error.c \
 		./parsing/tokenizer.c \
-		./parsing/utility.c
+		./parsing/utility.c \
+		./execute/execute.c \
+		./execute/execute_utility.c
 
 OBJS = $(SRCS:.c=.o)
 INCS = interface.h \
 		./parsing/parsing.h \
+		./execute/execute.h
 
 all : $(NAME)
 $(NAME) : $(OBJS)

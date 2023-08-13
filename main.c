@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:36:44 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/01 17:10:42 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/02 20:49:36 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"parsing.h"
+#include "parsing/parsing.h"
+#include "interface.h"
+#include "execute/execute.h"
 
 // compile 예시
 // gcc ../libft/ft_strlen.c ../libft/ft_split.c extract_feature.c test.c ../libft/ft_strlcpy.c ../libft/ft_strncmp.c utility.c ../libft/ft_strdup.c
