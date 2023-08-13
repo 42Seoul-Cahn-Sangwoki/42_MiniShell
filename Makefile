@@ -6,12 +6,12 @@
 #    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/03 11:54:00 by sangwoki         ###   ########.fr        #
+#    Updated: 2023/08/13 15:44:55 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Werror -Wall -Wextra -lreadline -L${HOME}/.brew/opt/readline/lib -I${HOME}/.brew/opt/readline/include
 NAME = minishell
 LIBFT = ./libft/libft.a
 SRCS = 	./main.c \
@@ -22,7 +22,11 @@ SRCS = 	./main.c \
 		./parsing/extract_feature.c \
 		./parsing/parsing_error.c \
 		./parsing/tokenizer.c \
-		./parsing/utility.c
+		./parsing/utility.c \
+		./parsing/ft_split_group.c \
+		./signal/signal.c \
+		./signal/term_set.c \
+		
 
 OBJS = $(SRCS:.c=.o)
 INCS = interface.h \

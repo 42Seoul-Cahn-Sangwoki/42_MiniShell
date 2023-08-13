@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.h                                           :+:      :+:    :+:   */
+/*   term_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 11:44:08 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/12 21:38:02 by sangwoki         ###   ########.fr       */
+/*   Created: 2023/08/13 13:09:48 by sangwoki          #+#    #+#             */
+/*   Updated: 2023/08/13 13:10:10 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNAL_H
-# define SIGNAL_H
+#include"signal.h"
 
-# include"../interface.h"
+void	term_echo_on(void)
+{
+	struct termios	term;
 
-# include <signal.h>
-# include <termios.h>
-# include <sys/types.h>
-# include <unistd.h>
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag |= ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}
 
-void	exit_status(int code);
-void	execute_handler(int signum);
-void	default_handler(int signum);
-void	execute_signal(void);
-void	default_signal(void);
-void	term_echo_off(void);
-void	term_echo_on(void);
+void	term_echo_off(void)
+{
+	struct termios	term;
 
-#endif
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}

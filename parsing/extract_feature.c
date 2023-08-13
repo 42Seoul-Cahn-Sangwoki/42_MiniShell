@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:39:58 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/02 22:26:52 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/13 16:07:16 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**extract_command(char **command, int length)
 		}
 		i++;
 	}
-	extract = ft_split(tmp, ' ');
+	extract = ft_split_group(tmp, TRUE, TRUE);
 	free(tmp);
 	return (extract);
 }

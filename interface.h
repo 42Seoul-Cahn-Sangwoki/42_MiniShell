@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/10 15:10:57 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/13 13:25:55 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # define WRITE_BACK 1
 # define READ -1
 # define HERE_DOC -2
+# define SUCCESS 1
+# define FAIL 0
+
+int	g_exit;
 
 typedef struct s_file_info
 {
@@ -44,3 +48,5 @@ typedef struct s_node
 // void	execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭 리턴)
 void	print_stderr(char *error_print);
 void	non_valid_error(char *error_print);
+void	free_split(char ***split);
+#endif

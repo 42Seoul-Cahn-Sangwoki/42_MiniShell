@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/10 14:54:29 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/13 13:37:15 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,29 @@
 // signal error: 
 
 // parsing error: \, ;, ', "
+
+void	error_pipe(char *cmd)
+{
+	char	**pipe_split;
+	int		i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (ft_strncmp(&cmd[i], "||", 2) == 0)
+			print_stderr("| is consequtive");
+		i++;
+	}
+	pipe_split = ft_split(cmd, '|');
+	i = 0;
+	while (pipe_split[i])
+	{
+		if (is_whitespace(pipe_split[i]))
+			print_stderr("white space between |");
+		i++;
+	}
+	free_split(&pipe_split);
+}
 
 int	error_symbol(char *command)
 {
@@ -25,32 +48,11 @@ int	error_symbol(char *command)
 	{
 		if (command[i] == ';' || command[i] == '\\')
 			break ;
+		if (ft_strncmp(&command[i], "$$", 2) == 0)
+			break ;
 		i++;
 	}
 	return (i != (int)ft_strlen(command));
-}
-
-int	error_bracket(char *command)
-{
-	int	i;
-	int	j;
-	int	failure;
-
-	failure = FALSE;
-	i = 0;
-	j = ft_strlen(command) - 1;
-	while (i < j && failure == FALSE)
-	{
-		while (command[i] && (command[i] != '\'' && command[i] != '\"'))
-			i++;
-		while (j >= 0 && (command[j] != '\'' && command[j] != '\"'))
-			j--;
-		if ((j >= 0 && command[i] != command[j]))
-			failure = TRUE;
-		i++;
-		j--;
-	}
-	return (failure == TRUE);
 }
 
 int	error_handling(char **corpus)
@@ -62,7 +64,7 @@ int	error_handling(char **corpus)
 	failure = FALSE;
 	while (corpus[i] && failure == FALSE)
 	{
-		if (error_bracket(corpus[i]) || error_symbol(corpus[i]))
+		if (error_symbol(corpus[i]))
 			failure = TRUE;
 		i++;
 	}

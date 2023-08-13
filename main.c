@@ -6,13 +6,14 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/09 14:20:02 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:58:08 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing/parsing.h"
 
-char	**g_envp;
+// char	**g_envp;
+int	g_envp;
 
 void	execute(t_node	**token, int length)
 {
@@ -50,6 +51,7 @@ void	execute(t_node	**token, int length)
 	}
 }
 
+// when ctrl + D -> eof. print exit.
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
@@ -64,18 +66,20 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		line = readline(" $>");
 		if (line == 0)
-			break ;
-		if (line[0] != '\0')
-			add_history(&line[ft_strlen(" $>")]);
-		if (line[0] != '\0' && !is_whitespace(line))
 		{
-			token = command_line(line, &length);
+			printf("exit\n");
+			break ;
+		}
+		if (line[0] != 0)
+			add_history(&line[ft_strlen(" $>")]);
+		if (line[0] != 0 && !is_whitespace(line))
+		{
+			token = command_line(line, &length, envp);
 			if (token == 0)
-				break ;
+				perror("missing: format");
 			execute(token, length);
 		}
 		free(line);
-		// free_token(token);
 	}
 	return (0);
 }
