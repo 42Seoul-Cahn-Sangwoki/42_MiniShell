@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:36:44 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 20:44:59 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/13 21:40:48 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char		**vector;
+	char		**vector;	
 	char		*tmp;
 	char		*quote;
 	t_file_info	*head1;
