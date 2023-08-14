@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/02 20:03:13 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/14 15:10:04 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ typedef struct s_node
     t_file_info     *infile_head; // head 더미노드로 할지 말지 알려주셈
     t_file_info     *outfile_head;
 }   t_node;
+
+typedef struct s_global
+{
+    char    **envp;
+    int     exit;
+}   t_global;
+
+t_global g_global_var;
 
 void    execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭 리턴)
 void	print_stderr(char *error_print);
