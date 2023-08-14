@@ -1,16 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   general_function.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 15:12:02 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/14 15:12:06 by cahn             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "interface.h"
+
+// default is 0
+void	exit_status(int code)
+{
+	if (code == SUCCESS)
+		g_global_var.exit = SUCCESS;
+	else if (code == FAIL)
+		g_global_var.exit = FAIL;
+	else
+		g_global_var.exit = code + 128;
+}
 
 void	non_valid_error(char *error_print)
 {
@@ -20,12 +20,14 @@ void	non_valid_error(char *error_print)
 	write(1, error_print, len);
 	write(1, " is not valid.\n", 16);
 	exit(1);
+	exit_status(FAIL);
 }
 
 void	print_stderr(char *error_print)
 {
 	perror(error_print);
 	exit(1);
+	exit_status(FAIL);
 }
 
 void	free_split(char ***split)
