@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:54:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/14 18:37:04 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:29:47 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ int	exclude_whitespace(char *str, int is_whitespace, int s_idx)
 			break ;
 		i++;
 	}
-	if (str[i] == '\'' || str[i] == '\"')
+	while (str[i] && (str[i] == '\'' || str[i] == '\"'))
 		i = find_next_quote(str, str[i], i + 1) + 1;
-	return (i);
+	if ((str[i] && (str[i] == ' ' || (9 <= str[i] && str[i] <= 13))) || !str[i])
+		return (i);
+	return (exclude_whitespace(str, is_whitespace, i));
 }
 
 size_t	mk_branch_group(char *str, int is_white, int is_quote)
@@ -37,6 +39,8 @@ size_t	mk_branch_group(char *str, int is_white, int is_quote)
 	size_t	rank;
 
 	rank = 0;
+	i = 0;
+	is_quote = 0;
 	if (is_white && str[0] != ' ' && !(9 <= str[0] && str[0] <= 13))
 	{
 		i = exclude_whitespace(str, is_white, 0);
@@ -51,7 +55,6 @@ size_t	mk_branch_group(char *str, int is_white, int is_quote)
 		else
 			i++;
 	}
-	printf("rank: %zu\n", rank);
 	return (rank);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:19:16 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 16:00:40 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:26:53 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ t_node	**init_token(int pipex_counter)
 {
 	t_node	**node;
 
-	node = (t_node **)malloc(sizeof(t_node *) * (pipex_counter + 1));
+	node = (t_node **)malloc(sizeof(t_node *) * (pipex_counter + 2));
 	return (node);
 }

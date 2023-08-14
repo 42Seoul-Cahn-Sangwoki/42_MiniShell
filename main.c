@@ -6,47 +6,50 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/11 11:58:08 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:10:52 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing/parsing.h"
+#include"signal/signal.h"
 
-// char	**g_envp;
-int	g_envp;
-
-void	execute(t_node	**token, int length)
+void	ft_execute(t_node **token, int length)
 {
+	int			i;
+	int			cmd_idx;
 	t_file_info	*head1;
 	t_file_info	*head2;
-	char		**command;
-	int			i;
-	int			j;
 
-	// printf("length: %d\n", length);
+	printf("length : %d\n", length);
 	i = 0;
-	while (i < length)
+	while (token[i])
 	{
-		j = 0;
-		command = token[i]->commands;
-		while (command[j])
+		printf("pipe: ");
+		cmd_idx = 0;
+		while (token[i]->commands[cmd_idx])
 		{
-			printf("commands: [%s]\n", command[j]);
-			j++;
+			printf("[%s] ", token[i]->commands[cmd_idx]);
+			cmd_idx++;
 		}
 		head1 = token[i]->infile_head;
-		while (head1)
+		if (head1 != 0)
 		{
-			printf("[%s %d]\n", head1->file_name, head1->write_mode);
-			head1 = head1->next;
+			while (head1->next)
+			{
+				printf("[%s %d]\n", head1->file_name, head1->write_mode);
+				head1 = head1->next;
+			}
 		}
+		printf("\n\n\n");
 		head2 = token[i]->outfile_head;
-		while (head2)
+		if (head2 != 0)
 		{
-			printf("[%s %d]\n", head2->file_name, head2->write_mode);
-			head2 = head2->next;
+			while (head2->next)
+			{
+				printf("[%s %d]\n", head2->file_name, head2->write_mode);
+				head2 = head2->next;
+			}
 		}
-		printf("\n\n\n\n");
 		i++;
 	}
 }
@@ -58,12 +61,13 @@ int	main(int argc, char *argv[], char *envp[])
 	t_node	**token;
 	int		length;
 
-	g_envp = envp;
-	argc = 0;
 	argv = 0;
-	// set_signal_terminal(argc, argv);
+	argc = 0;
+	g_global_var.envp = envp;
+	g_global_var.exit = 0;
 	while (1)
 	{
+		default_signal();
 		line = readline(" $>");
 		if (line == 0)
 		{
@@ -71,13 +75,15 @@ int	main(int argc, char *argv[], char *envp[])
 			break ;
 		}
 		if (line[0] != 0)
-			add_history(&line[ft_strlen(" $>")]);
+			add_history(&line[0]);
 		if (line[0] != 0 && !is_whitespace(line))
 		{
 			token = command_line(line, &length, envp);
 			if (token == 0)
 				perror("missing: format");
-			execute(token, length);
+			execute_signal();
+			ft_execute(token, length);
+			// token free
 		}
 		free(line);
 	}

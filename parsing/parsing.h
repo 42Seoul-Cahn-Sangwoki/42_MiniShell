@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 20:16:58 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:17:08 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,14 @@ t_node		**init_token(int pipex_counter);
 // tokenizer.c
 t_node		**token2corpus(int pipex_counter, char *line, char **envp);
 t_node		**command_line(char *line, int *length, char **envp);
-char    	**normalize_file(char **cmd);
-int	        is_file(char *cmd);
+char		**normalize_file(char **cmd);
+int			is_file(char *cmd);
 t_node		*tokenizer(char *norm_command, char **envp);
 
 // parsing_error.c
 int			error_handling(char **corpus);
 int			error_symbol(char *command);
 void		error_pipe(char *cmd);
-// parsing_free.c
-void		free_corpus(char **curpus);
-
 // utitlity.c
 int			normalize_redirect(char *dup, char *command, int *is_mode);
 void		ft_push_back(t_file_info **head, t_file_info **node);
@@ -55,7 +52,7 @@ char		*find_env(char **envp, char *name);
 char		*extract_name(char *line, int *e_idx);
 
 // handler_symbol.c
-void		handle_quote(char **cmd, char **envp);
+char		**handle_quote(char **cmd, char **envp);
 int			find_next_quote(char *cmd, char quote, int i);
 char		*split_by_normal(char *cmd, int s_idx, int e_idx);
 char		**divided_quote(char *cmd);

@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:39:58 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 16:07:16 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:20:15 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**extract_command(char **command, int length)
 
 	i = 0;
 	j = 0;
-	tmp = (char *)malloc(sizeof(char) * length);
+	tmp = (char *)malloc(sizeof(char) * (length * 2));
 	while (command[i])
 	{
 		if (command[i][0] != '<' && command[i][0] != '>')
@@ -34,6 +34,7 @@ char	**extract_command(char **command, int length)
 			ft_strlcpy(&tmp[j], command[i], ft_strlen(command[i]) + 1);
 			tmp[j + ft_strlen(command[i])] = ' ';
 			j = j + ft_strlen(command[i]) + 1;
+			tmp[j] = 0;
 		}
 		i++;
 	}

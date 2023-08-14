@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:49:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 20:43:49 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:22:36 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_node	*tokenizer(char *command, char **envp)
 	token = (t_node *)malloc(sizeof(t_node));
 	vector = ft_split_group(command, TRUE, TRUE);
 	token->commands = extract_command(vector, ft_strlen(command));
-	handle_quote(token->commands, envp);
+	token->commands = handle_quote(token->commands, envp);
 	vector = normalize_file(vector);
 	token->infile_head = extract_infile(vector);
 	token->outfile_head = extract_outfile(vector);
@@ -91,7 +91,8 @@ t_node	**token2corpus(int pipex_counter, char *line, char **envp)
 		token[i] = tokenizer(corpus[i], envp);
 		i++;
 	}
-	free_corpus(corpus);
+	token[i] = 0;
+	free(corpus);
 	return (token);
 }
 

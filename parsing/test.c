@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:36:44 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/14 18:36:37 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:12:07 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char *argv[], char *envp[])
 		head2 = head2->next;
 	}
 
-	quote = "ec\'ho\' go home\'this is next\'\'this is good?\'" ;
+	quote = "\'e\'\'c\'\'h\'\'o\' go home\'this is next\'\'this is good?\'" ;
 	i = 0;
 	vector = ft_split_group(quote, TRUE, TRUE);
 	while (vector[i])

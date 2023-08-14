@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:34:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 16:28:26 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:19:00 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // 1. split by quote: cmd[next_quote]=' '-> split
 // 2. change each group considering $ and quote rule.
 // 3. merge group
-void	handle_quote(char **cmd, char **envp)
+char	**handle_quote(char **cmd, char **envp)
 {
 	char	**divided;
 	char	*ex_quote;
@@ -39,6 +39,7 @@ void	handle_quote(char **cmd, char **envp)
 		cmd[i] = ft_merge(divided);
 		i++;
 	}
+	return (cmd);
 }
 
 // 2. change each group considering $ and quote rule.
