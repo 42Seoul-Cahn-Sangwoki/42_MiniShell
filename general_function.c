@@ -5,11 +5,11 @@
 void	exit_status(int code)
 {
 	if (code == SUCCESS)
-		g_exit = SUCCESS;
+		g_global_var.exit = SUCCESS;
 	else if (code == FAIL)
-		g_exit = FAIL;
+		g_global_var.exit = FAIL;
 	else
-		g_exit = code + 128;
+		g_global_var.exit = code + 128;
 }
 
 void	non_valid_error(char *error_print)

@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   interface.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 16:33:43 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/14 15:11:42 by cahn             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef INTERFACE_H
 # define INTERFACE_H
@@ -25,6 +14,8 @@
 #define WRITE_BACK 1
 #define READ -1
 #define HERE_DOC -2
+#define SUCCESS 1
+#define FAIL 0
 
 typedef struct s_file_info
 {
