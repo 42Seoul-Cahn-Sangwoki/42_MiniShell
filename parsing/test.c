@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:36:44 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 21:40:48 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:36:37 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,24 @@ int	main(int argc, char *argv[], char *envp[])
 	i = 0;
 	while (vector[i])
 	{
-		printf("%s\n", vector[i]);
+		printf("[%s]\n", vector[i]);
 		i++;
 	}
 	head1 = extract_infile(vector);
 	while (head1->next)
 	{
-		printf("%s %d\n", head1->file_name, head1->write_mode);
+		printf("[%s %d]\n", head1->file_name, head1->write_mode);
 		head1 = head1->next;
 	}
 	printf("\n\n\n");
 	head2 = extract_outfile(vector);
 	while (head2->next)
 	{
-		printf("%s %d\n", head2->file_name, head2->write_mode);
+		printf("[%s %d]\n", head2->file_name, head2->write_mode);
 		head2 = head2->next;
 	}
 
-	quote = "echo \"\'$?$GO$HOME$HOME$HOME$HOME$? $\'\"" ;
+	quote = "ec\'ho\' go home\'this is next\'\'this is good?\'" ;
 	i = 0;
 	vector = ft_split_group(quote, TRUE, TRUE);
 	while (vector[i])

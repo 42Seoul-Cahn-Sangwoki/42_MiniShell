@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:48:03 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 16:39:23 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:12:18 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*find_env(char **envp, char *name)
 	i = 0;
 	res = 0;
 	if (name[0] == '?')
-		res = ft_itoa(g_exit);
+		res = ft_itoa(g_global_var.exit);
 	if (name[0] == 0)
 		res = ft_strdup("$");
 	while (res == 0 && envp[i] != 0)

@@ -6,28 +6,9 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:54:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 20:10:27 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:37:04 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// # define TRUE 1
-// # define FALSE 0
-// # include <stdio.h>
-// # include <unistd.h>
-// # include <stdlib.h>
-
-// int	find_next_quote(char *cmd, char quote, int i)
-// {
-// 	while (cmd[i] && cmd[i] != quote)
-// 		i++;
-// 	if (cmd[i] == 0)
-// 	{
-// 		printf("quote is unbalance\n");
-// 		exit(0);
-// 	}
-// 	// printf("find_next_quote : %d, %c\n", i, cmd[i]);
-// 	return (i);
-// }
 
 #include"parsing.h"
 
@@ -39,34 +20,38 @@ int	exclude_whitespace(char *str, int is_whitespace, int s_idx)
 		return (s_idx);
 	i = s_idx;
 	while (str[i] && str[i] != ' ' && !(9 <= str[i] && str[i] <= 13))
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+			break ;
 		i++;
+	}
+	if (str[i] == '\'' || str[i] == '\"')
+		i = find_next_quote(str, str[i], i + 1) + 1;
 	return (i);
 }
 
 size_t	mk_branch_group(char *str, int is_white, int is_quote)
 {
 	size_t	i;
-	size_t	skip;
+	size_t	mark;
 	size_t	rank;
 
 	rank = 0;
 	if (is_white && str[0] != ' ' && !(9 <= str[0] && str[0] <= 13))
+	{
+		i = exclude_whitespace(str, is_white, 0);
 		rank++;
-	i = 1;
+	}
 	while (str[i])
 	{
-		if (is_quote && (str[i] == '\'' || str[i] == '\"'))
-		{
-			i = find_next_quote(str, str[i], i + 1);
+		mark = i;
+		i = exclude_whitespace(str, is_white, i);
+		if (i != mark)
 			rank++;
-		}
-		if (str[i - 1] == ' ' || (9 <= str[i - 1] && str[i - 1] <= 13))
-		{
-			if (is_white && str[i] != ' ' && !(9 <= str[i] && str[i] <= 13))
-				rank++;
-		}
-		i++;
+		else
+			i++;
 	}
+	printf("rank: %zu\n", rank);
 	return (rank);
 }
 
@@ -100,10 +85,7 @@ size_t	mk_tree_group(char *str, int flag, size_t size, char **branch)
 	while (j < size)
 	{
 		mark = i;
-		if ((flag & 2) && (str[i] == '\'' || str[i] == '\"'))
-			i = find_next_quote(str, str[i], i + 1) + 1;
-		else if (flag & 1)
-			i = exclude_whitespace(str, (flag & 1), i);
+		i = exclude_whitespace(str, (flag & 3), i);
 		if (mark != i)
 		{
 			branch[j] = mk_leaf_group(&str[mark], i - mark);
@@ -111,7 +93,8 @@ size_t	mk_tree_group(char *str, int flag, size_t size, char **branch)
 				return (j);
 			j++;
 		}
-		i++;
+		else
+			i++;
 	}
 	return (j);
 }
