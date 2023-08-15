@@ -6,15 +6,11 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/13 13:37:15 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:53:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-// signal error: 
-
-// parsing error: \, ;, ', "
 
 void	error_pipe(char *cmd)
 {

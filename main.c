@@ -6,85 +6,35 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/14 23:10:52 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:51:05 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing/parsing.h"
 #include"signal/signal.h"
 
-void	ft_execute(t_node **token, int length)
-{
-	int			i;
-	int			cmd_idx;
-	t_file_info	*head1;
-	t_file_info	*head2;
-
-	printf("length : %d\n", length);
-	i = 0;
-	while (token[i])
-	{
-		printf("pipe: ");
-		cmd_idx = 0;
-		while (token[i]->commands[cmd_idx])
-		{
-			printf("[%s] ", token[i]->commands[cmd_idx]);
-			cmd_idx++;
-		}
-		head1 = token[i]->infile_head;
-		if (head1 != 0)
-		{
-			while (head1->next)
-			{
-				printf("[%s %d]\n", head1->file_name, head1->write_mode);
-				head1 = head1->next;
-			}
-		}
-		printf("\n\n\n");
-		head2 = token[i]->outfile_head;
-		if (head2 != 0)
-		{
-			while (head2->next)
-			{
-				printf("[%s %d]\n", head2->file_name, head2->write_mode);
-				head2 = head2->next;
-			}
-		}
-		i++;
-	}
-}
-
 // when ctrl + D -> eof. print exit.
+// ========================================== //
+// valid_command_line has execute and parsing
+// ========================================== //
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
-	t_node	**token;
-	int		length;
 
-	argv = 0;
-	argc = 0;
-	g_global_var.envp = envp;
-	g_global_var.exit = 0;
+	init_env(argc, argv, envp);
 	while (1)
 	{
 		default_signal();
-		line = readline(" $>");
+		line = readline(" $> ");
 		if (line == 0)
 		{
-			printf("exit\n");
+			printf("\033[A\b\b\b $> exit\n");
 			break ;
 		}
 		if (line[0] != 0)
 			add_history(&line[0]);
 		if (line[0] != 0 && !is_whitespace(line))
-		{
-			token = command_line(line, &length, envp);
-			if (token == 0)
-				perror("missing: format");
-			execute_signal();
-			ft_execute(token, length);
-			// token free
-		}
+			valid_command_line(line);
 		free(line);
 	}
 	return (0);

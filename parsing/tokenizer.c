@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:49:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/14 23:22:36 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:23:36 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_file(char *cmd)
 	return (ret);
 }
 
-char	**normalize_file(char **join_file)
+void	normalize_file(char **join_file)
 {
 	int		i;
 	int		next_is_name;
@@ -53,7 +53,6 @@ char	**normalize_file(char **join_file)
 	}
 	if (next_is_name == TRUE)
 		print_stderr("dont't have fd");
-	return (join_file);
 }
 
 // handle_quote
@@ -65,9 +64,9 @@ t_node	*tokenizer(char *command, char **envp)
 
 	token = (t_node *)malloc(sizeof(t_node));
 	vector = ft_split_group(command, TRUE, TRUE);
+	normalize_file(vector);
 	token->commands = extract_command(vector, ft_strlen(command));
-	token->commands = handle_quote(token->commands, envp);
-	vector = normalize_file(vector);
+	handle_quote(token->commands, envp);
 	token->infile_head = extract_infile(vector);
 	token->outfile_head = extract_outfile(vector);
 	free_split(&vector);

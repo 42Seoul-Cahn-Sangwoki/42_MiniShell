@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:54:17 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/14 22:48:58 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:39:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,15 @@ int	normalize_redirect(char *dup, char *command, int *is_mode)
 	while (command[i] && command[i] == ' ')
 		i++;
 	return (i);
+}
+
+char	*change_commend_utility(char *cmd, char value, int i, int s_idx)
+{
+	char	*tmp;
+
+	value = cmd[i];
+	cmd[i] = 0;
+	tmp = ft_strdup(&cmd[s_idx]);
+	cmd[i] = value;
+	return (tmp);
 }

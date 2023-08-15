@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:34:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/14 23:19:00 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:39:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // 1. split by quote: cmd[next_quote]=' '-> split
 // 2. change each group considering $ and quote rule.
 // 3. merge group
-char	**handle_quote(char **cmd, char **envp)
+void	handle_quote(char **cmd, char **envp)
 {
 	char	**divided;
 	char	*ex_quote;
@@ -39,7 +39,6 @@ char	**handle_quote(char **cmd, char **envp)
 		cmd[i] = ft_merge(divided);
 		i++;
 	}
-	return (cmd);
 }
 
 // 2. change each group considering $ and quote rule.
@@ -80,13 +79,11 @@ char	*change_commed(char **envp, char *cmd, char value)
 			s_idx = i;
 			while (cmd[i] && cmd[i] != '$')
 				i++;
-			value = cmd[i];
-			cmd[i] = 0;
-			tmp = ft_strdup(&cmd[s_idx]);
-			cmd[i] = value;
+			tmp = change_commend_utility(cmd, value, i, s_idx);
 		}
 		join_cmd = append_commend(join_cmd, tmp);
 	}
+	free(cmd);
 	return (join_cmd);
 }
 

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   interface.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/15 15:42:56 by sangwoki          #+#    #+#             */
+/*   Updated: 2023/08/15 15:48:44 by sangwoki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef INTERFACE_H
 # define INTERFACE_H
@@ -10,39 +21,41 @@
 # include <readline/history.h>
 # include <signal.h>
 
-#define WRITE_NEW 0
-#define WRITE_BACK 1
-#define READ -1
-#define HERE_DOC -2
-#define SUCCESS 1
-#define FAIL 0
+# define WRITE_NEW 0
+# define WRITE_BACK 1
+# define READ -1
+# define HERE_DOC -2
+# define SUCCESS 1
+# define FAIL 0
 
 typedef struct s_file_info
 {
-    char                *file_name; // Null 이면 fd값 확인
-    int                 fd;
-    int                 write_mode; // 여기 매크로값 넣어주셈 (> 이거는 0, >> 이거는 1, inputfile이면 -1)
-    struct s_file_info  *next;
-}   t_file_info;
+	char				*file_name;
+	int					fd;
+	int					write_mode;
+	struct s_file_info	*next;
+}	t_file_info;
 
 typedef struct s_node
 {
-    char            **commands; // 딱 명령어 만큼만 할당해주셈
-    t_file_info     *infile_head; // head 더미노드로 할지 말지 알려주셈
-    t_file_info     *outfile_head;
-}   t_node;
+	char			**commands;
+	t_file_info		*infile_head;
+	t_file_info		*outfile_head;
+}	t_node;
 
 typedef struct s_global
 {
-    char    **envp;
-    int     exit;
-}   t_global;
+	char	**envp;
+	int		exit;
+}	t_global;
 
-t_global g_global_var;
+t_global	g_global_var;
 
-void    execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭 리턴)
+void	execute(t_node *cmds, int length);
 void	print_stderr(char *error_print);
 void	non_valid_error(char *error_print);
 void	free_split(char ***split);
+void	init_env(int argc, char *argv[], char *envp[]);
+void	valid_command_line(char *line);
 
 #endif

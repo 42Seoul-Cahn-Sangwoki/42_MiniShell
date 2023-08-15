@@ -6,17 +6,17 @@
 #    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/14 23:14:46 by sangwoki         ###   ########.fr        #
+#    Updated: 2023/08/15 15:49:39 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra
 LINKING_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
 COMPILE_FLAGS = -I${HOME}/.brew/opt/readline/include
 NAME = minishell
 LIBFT = ./libft/libft.a
-SRCS = 	./main.c ./general_function.c \
+SRCS = 	./main.c ./general_function.c ./main_utility.c\
 		./parsing/parsing_error.c \
 		./parsing/tokenizer.c \
 		./parsing/preprocessing.c \
@@ -27,6 +27,7 @@ SRCS = 	./main.c ./general_function.c \
 		./parsing/ft_split_group.c \
 		./parsing/handle_symbol.c \
 		./parsing/execute_dollar.c \
+		./parsing/token_free.c \
 		./signal/signal.c \
 		./signal/term_set.c \
 		
