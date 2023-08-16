@@ -44,26 +44,3 @@ void	free_split(char ***split)
 	}
 	free(tmp);
 }
-
-char	**copy_env(char **envp)
-{
-	char	**new_envp;
-	int		i;
-
-	i = 0;
-	while (envp[i])
-		++i;
-	new_envp = (char **)malloc(sizeof(char *) * (i + 1));
-	if (!new_envp)
-		print_stderr("Malloc");
-	i = 0;
-	while (envp[i])
-	{
-		new_envp[i] = ft_strdup(envp[i]);
-		if (!new_envp[i])
-			print_stderr("Malloc");
-		++i;
-	}
-	return (new_envp);
-}
-
