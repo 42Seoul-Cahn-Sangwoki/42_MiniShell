@@ -34,7 +34,7 @@ typedef struct s_node
 
 typedef struct s_global
 {
-    char    **envp;
+    char    **cp_envp; // envp 카피해서 사용.
     int     exit;
 }   t_global;
 
@@ -44,5 +44,6 @@ void    execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭
 void	print_stderr(char *error_print);
 void	non_valid_error(char *error_print);
 void	free_split(char ***split);
+char	**copy_env(char **envp) // free_split으로 free가능.
 
 #endif
