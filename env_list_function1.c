@@ -55,7 +55,8 @@ void    modify_env_value(t_env_node *node, const char *str)
         printf("node is absence\n");
         return ;
     }
-    free(node->value);
+    if (node->value != NULL)
+        free(node->value);
     node->value = ft_strdup(str);
 }
 
