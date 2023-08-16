@@ -61,5 +61,9 @@ void        modify_env_value(t_env_node *node, const char *str);
 void        print_env_string_with_newline(t_env_node *node);
 void        print_all_env(t_env_node *head);
 void        delete_node(t_env_node **head, t_env_node *node);
+int         return_env_list_size(t_env_node *head);
+char        **make_origin_form_envp(t_env_node *head); // 연결리스트를 통해 원래 char **형태의 envp 만들기. 수정해도 원래 연결리스트에는 영향을 주지 않음.
+
+
 
 #endif
