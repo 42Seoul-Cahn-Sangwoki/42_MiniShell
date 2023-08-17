@@ -64,6 +64,8 @@ void        delete_node(t_env_node **head, t_env_node *node);
 int         return_env_list_size(t_env_node *head);
 char        **make_origin_form_envp(t_env_node *head); // 연결리스트를 통해 원래 char **형태의 envp 만들기. 수정해도 원래 연결리스트에는 영향을 주지 않음.
 void        free_env_node(t_env_node *node);
+void        free_env_list(t_env_node **head);
+
 
 
 
