@@ -1,5 +1,6 @@
 {
     "files.associations": {
+<<<<<<< HEAD
         "parsing.h": "c",
         "locale": "c",
         "interface.h": "c",
@@ -9,5 +10,16 @@
         "__string": "c",
         "string": "c",
         "string_view": "c"
+=======
+<<<<<<< HEAD
+        "termios.h": "c",
+        "execute.h": "c",
+        "__node_handle": "c",
+        "interface.h": "c",
+        "system_error": "c"
+=======
+        "stdio.h": "c"
+>>>>>>> a4d54f4411e0ae2b944f613e05960cd95a072487
+>>>>>>> merge_test
     }
 }

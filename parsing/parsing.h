@@ -6,7 +6,11 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/17 21:11:12 by sangwoki         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/17 23:35:48 by sangwoki         ###   ########.fr       */
+>>>>>>> merge_test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +35,11 @@ t_node		*token2corpus(int pipex_counter, char *line);
 t_node		*command_line(char *line, int *length);
 void		normalize_file(char **cmd);
 int			is_file(char *cmd);
+<<<<<<< HEAD
 void		tokenizer(t_node *token, char *command);
+=======
+void    	tokenizer(t_node *token, char *command);
+>>>>>>> merge_test
 
 // parsing_error.c
 int			error_handling(char **corpus);
@@ -76,4 +84,8 @@ void		token_free(t_node ***token);
 // main_utility.c
 void		init_env(int argc, char *argv[], char *envp[]);
 void		valid_command_line(char *line);
+<<<<<<< HEAD
+=======
+void		execute_shell(char ***command);
+>>>>>>> merge_test
 #endif

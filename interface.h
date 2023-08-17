@@ -9,13 +9,19 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <string.h>
 
 #define WRITE_NEW 0
 #define WRITE_BACK 1
 #define READ -1
 #define HERE_DOC -2
+<<<<<<< HEAD
 #define SUCCESS 0
 #define FAIL 1
+=======
+#define SUCCESS 1
+#define FAIL 0
+>>>>>>> merge_test
 
 typedef struct s_file_info
 {
