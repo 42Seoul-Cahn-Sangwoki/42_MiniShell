@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:49:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 17:41:33 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 20:41:54 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,10 @@ void	normalize_file(char **join_file)
 
 // handle_quote
 // token->commands = extract_command(vector, ft_strlen(norm_command));
-t_node	*tokenizer(char *command)
+void	tokenizer(t_node *token, char *command)
 {
 	char	**vector;
-	t_node	*token;
 
-	token = (t_node *)malloc(sizeof(t_node));
-	if (token == 0)
-		print_stderr("MALLOC");
 	vector = ft_split_group(command, TRUE, TRUE);
 	normalize_file(vector);
 	token->commands = extract_command(vector, ft_strlen(command));
@@ -73,14 +69,13 @@ t_node	*tokenizer(char *command)
 	token->outfile_head = extract_outfile(vector);
 	free_split(&vector);
 	free(command);
-	return (token);
 }
 
-t_node	**token2corpus(int pipex_counter, char *line)
+t_node	*token2corpus(int pipex_counter, char *line)
 {
 	char	**corpus;
 	int		i;
-	t_node	**token;
+	t_node	*token;
 
 	corpus = ft_split(line, '|');
 	if (error_handling(corpus) == TRUE)
@@ -89,17 +84,16 @@ t_node	**token2corpus(int pipex_counter, char *line)
 	i = 0;
 	while (i < pipex_counter + 1)
 	{
-		token[i] = tokenizer(corpus[i]);
+		tokenizer(token + i ,corpus[i]);
 		i++;
 	}
-	token[i] = 0;
 	free(corpus);
 	return (token);
 }
 
-t_node	**command_line(char *line, int *length)
+t_node	*command_line(char *line, int *length)
 {
-	t_node	**token;
+	t_node	*token;
 	int		pipex_counter;
 
 	error_pipe(line);

@@ -4,6 +4,10 @@
         "locale": "c",
         "interface.h": "c",
         "sstream": "c",
-        "readline.h": "c"
+        "readline.h": "c",
+        "__locale": "c",
+        "__string": "c",
+        "string": "c",
+        "string_view": "c"
     }
 }
