@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:58:28 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/16 20:34:31 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/17 20:19:48 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void    print_all_env_have_value(t_env_node *head)
     search = head;
     while (search != NULL)
     {
-        print_env_string_with_newline(search);
+        print_env_string_with_newline_have_value(search);
         search = search->next;
     }
 }

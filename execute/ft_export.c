@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:51:16 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/16 21:23:32 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/17 20:21:21 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void export_no_parameter() // 문자열 오름차순으로 출력
         ++i;
     }
     print_export(for_sort);
-    free_split(for_sort);
+    free_split(&for_sort);
 }
 
 static int  parameter_check(char *para)
@@ -82,7 +82,8 @@ static int  parameter_check(char *para)
         if (!ft_isalnum(para[i]) && para[i] != '_')
             return (0);
         ++i;
-    }    
+    }
+    return (1);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 17:15:10 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/17 20:22:35 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	execute_built_in(char *command, char **parameter)
 		ft_exit(parameter);
 }
 
-int	token_processing(t_node *token, int *pipe, int index, int length)
+void	token_processing(t_node *token, int *pipe, int index, int length)
 {
 	int		input_fd;
 	int		output_fd;

@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:58:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 17:08:16 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/17 20:21:56 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void    ft_pwd(char **parameter)
 {
     t_env_node  *pwd;
 
+    if (parameter[1]) // error;
+        return ;
     pwd = search_node_by_key(g_global_var.envp_head, "PWD");
     if (!pwd)
     {

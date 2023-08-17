@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:45:14 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 17:16:39 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/17 20:22:45 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_process_manage
 int	    check_and_create_file_by_write(char *file_name);
 int	    return_input_fd(t_file_info *head);
 int	    return_output_fd(t_file_info *head);
-int	    token_processing(t_node *token, int *pipe, int index, int length);
+void    token_processing(t_node *token, int *pipe, int index, int length);
 void	parent_processing(t_process_manage *pm, t_node *head, int length);
 void	allocate_process_manage(t_process_manage *pm, int length);
 char    *return_tmpfile_name_by_here_document(char *end_string);
