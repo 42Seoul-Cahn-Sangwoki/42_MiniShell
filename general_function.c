@@ -12,10 +12,16 @@
 // 		g_global_var.exit = code + 128;
 // }  g_global_var.exit = code % 256
 
-void	print_stderr(int error_code)
+void	print_stderr_no_exit(char *command, int code)
 {
-	perror(strerror(error_code));
-	exit(error_code);
+	g_global_var.exit = code % 256;
+	printf("minishell: %s: %s\n", command, strerror(g_global_var.exit));
+}
+
+void	print_stderr(char *error_print)
+{
+	perror(error_print);
+	exit(1);
 }
 
 void	free_split(char ***split)
