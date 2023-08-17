@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 20:42:15 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 23:35:48 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void		token_free(t_node ***token);
 // main_utility.c
 void		init_env(int argc, char *argv[], char *envp[]);
 void		valid_command_line(char *line);
+void		execute_shell(char ***command);
 #endif

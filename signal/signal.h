@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:44:08 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/12 21:38:02 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 22:31:47 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ void	execute_signal(void);
 void	default_signal(void);
 void	term_echo_off(void);
 void	term_echo_on(void);
+
+void	execute_parent_hanlder(int signum);
+void	execute_parent_signal(void);
 
 #endif

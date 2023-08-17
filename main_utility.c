@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utility.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 21:00:38 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/17 23:36:25 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,35 @@
 // 	}
 // }
 
+void	execute_shell(char ***command)
+{
+	char	**new_cmd;
+
+	if (ft_strncmp((*command)[0], "./minishell", ft_strlen("./minishell")))
+		return ;
+	new_cmd = (char **)malloc(sizeof(char *) * 3);
+	new_cmd[0] = ft_strdup((*command)[0]);
+	new_cmd[1] = search_node_by_key(g_global_var.envp_head, "SHLVL")->value;
+	new_cmd[2] = 0;
+	free_split(command);
+	(*command) = new_cmd;
+}
+
 void	init_env(int argc, char *argv[], char *envp[])
 {
-	argv = 0;
-	argc = 0;
+	t_env_node	*node;
+	char		*shlvl;
+
 	g_global_var.envp_head = copy_env_return_head(envp);
 	g_global_var.exit = 0;
+	if (argc >= 2)
+	{
+		node = search_node_by_key(g_global_var.envp_head, "SHLVL");
+		shlvl = ft_itoa(ft_atoi(argv[1]) + 1);
+		modify_env_value(node, shlvl);
+	}
+	argv = 0;
+	argc = 0;
 }
 
 // ft_exeucte -> execute
@@ -72,7 +95,10 @@ void	valid_command_line(char *line)
 
 	token = command_line(line, &length);
 	if (token == 0)
+	{
 		print_stderr_no_exit("missing: format", FAIL);
+		return ;
+	}
 	execute_signal();
 	execute(token, length);
 	free(token);
