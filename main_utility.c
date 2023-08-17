@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/15 15:55:30 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:36:01 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	init_env(int argc, char *argv[], char *envp[])
 
 // ft_exeucte -> execute
 void	valid_command_line(char *line)
+
 {
 	int		length;
 	t_node	**token;
