@@ -50,8 +50,7 @@ typedef struct s_global
 t_global g_global_var;
 
 void        execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭 리턴)
-void	    print_stderr(char *error_print);
-void	    non_valid_error(char *error_print);
+void	    print_stderr(int error_code);
 void	    free_split(char ***split);
 t_env_node  *copy_env_return_head(char **envp);
 t_env_node  *get_node(const char *string);

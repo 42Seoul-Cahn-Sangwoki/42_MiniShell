@@ -2,32 +2,20 @@
 #include "interface.h"
 
 // default is 0
-void	exit_status(int code)
-{
-	if (code == SUCCESS)
-		g_global_var.exit = SUCCESS;
-	else if (code == FAIL)
-		g_global_var.exit = FAIL;
-	else
-		g_global_var.exit = code + 128;
-}
+// void	exit_status(int code)
+// {
+// 	if (code == SUCCESS)
+// 		g_global_var.exit = SUCCESS;
+// 	else if (code == FAIL)
+// 		g_global_var.exit = FAIL;
+// 	else
+// 		g_global_var.exit = code + 128;
+// }  g_global_var.exit = code % 256
 
-void	non_valid_error(char *error_print)
+void	print_stderr(int error_code)
 {
-	int	len;
-
-	len = ft_strlen(error_print);
-	write(1, error_print, len);
-	write(1, " is not valid.\n", 16);
-	exit(1);
-	exit_status(FAIL);
-}
-
-void	print_stderr(char *error_print)
-{
-	perror(error_print);
-	exit(1);
-	exit_status(FAIL);
+	perror(strerror(error_code));
+	exit(error_code);
 }
 
 void	free_split(char ***split)
