@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/13 21:55:15 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/17 21:13:05 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 	i = 0;
 	while (i < length)
 	{
-		waitpid(pm->child_pid_array[i], NULL, WNOHANG);
+		waitpid(pm->child_pid_array[i], NULL, 0);
 		++i;
 	}
     free(pm->child_pid_array);

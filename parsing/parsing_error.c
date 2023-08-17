@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/15 15:53:41 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:41:57 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	error_pipe(char *cmd)
 	while (cmd[i])
 	{
 		if (ft_strncmp(&cmd[i], "||", 2) == 0)
-			print_stderr("| is consequtive");
+			print_stderr_no_exit("| is consequtive", FAIL);
 		i++;
 	}
 	pipe_split = ft_split(cmd, '|');
@@ -29,7 +29,7 @@ void	error_pipe(char *cmd)
 	while (pipe_split[i])
 	{
 		if (is_whitespace(pipe_split[i]))
-			print_stderr("white space between |");
+			print_stderr_no_exit("white space between |", FAIL);
 		i++;
 	}
 	free_split(&pipe_split);

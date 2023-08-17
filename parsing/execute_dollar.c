@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:48:03 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 14:17:00 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:40:29 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	find_next_quote(char *cmd, char quote, int i)
 	while (cmd[i] && cmd[i] != quote)
 		i++;
 	if (cmd[i] == 0)
-		print_stderr("quote is unbalance");
+		print_stderr_no_exit("quote is unbalance", FAIL);
 	return (i);
 }
 

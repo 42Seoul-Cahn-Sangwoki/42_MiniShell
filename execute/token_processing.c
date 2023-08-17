@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 20:22:35 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/17 21:09:24 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	token_processing(t_node *token, int *pipe, int index, int length)
 	output_fd = return_output_fd(token->outfile_head);
 	if (input_fd != -1)
 		dup2(input_fd, 0);
-	else
+	else if (index < length - 1)
 		dup2(pipe[0], 0);
 	if (output_fd != -1)
 		dup2(output_fd, 1);
