@@ -1,9 +1,13 @@
 {
     "files.associations": {
+<<<<<<< HEAD
         "termios.h": "c",
         "execute.h": "c",
         "__node_handle": "c",
         "interface.h": "c",
         "system_error": "c"
+=======
+        "stdio.h": "c"
+>>>>>>> a4d54f4411e0ae2b944f613e05960cd95a072487
     }
 }
