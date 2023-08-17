@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 13:36:01 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:21:18 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,17 @@ void	init_env(int argc, char *argv[], char *envp[])
 {
 	argv = 0;
 	argc = 0;
-	g_global_var.envp = envp;
+	g_global_var.envp_head = copy_env_return_head(envp);
 	g_global_var.exit = 0;
 }
 
 // ft_exeucte -> execute
 void	valid_command_line(char *line)
-
 {
 	int		length;
 	t_node	**token;
-	char	**envp;
 
-	envp = g_global_var.envp;
-	token = command_line(line, &length, envp);
+	token = command_line(line, &length);
 	if (token == 0)
 		print_stderr("missing: format");
 	execute_signal();

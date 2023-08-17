@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:39:57 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 13:50:59 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:48:57 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	non_valid_error(char *error_print)
 	len = ft_strlen(error_print);
 	write(1, error_print, len);
 	write(1, " is not valid.\n", 16);
-	exit(1);
 	exit_status(FAIL);
+	exit(1);
 }
 
-void	print_stderr(char *error_print)
+void	print_stderr(const char *error_print)
 {
 	perror(error_print);
-	exit(1);
 	exit_status(FAIL);
+	exit(1);
 }
 
 void	free_split(char ***split)

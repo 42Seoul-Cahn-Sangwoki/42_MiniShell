@@ -6,31 +6,30 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:48:03 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/15 13:38:15 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:17:00 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing.h"
 
-char	*find_env(char **envp, char *name)
+char	*find_env(char *name)
 {
-	int		i;
-	char	*res;
+	char		*res;
+	t_env_node	*node;
 
-	i = 0;
 	res = 0;
 	if (name[0] == '?')
 		res = ft_itoa(g_global_var.exit);
 	if (name[0] == 0)
 		res = ft_strdup("$");
-	while (res == 0 && envp[i] != 0)
-	{
-		if (ft_strncmp(name, envp[i], ft_strlen(name)) == 0)
-			res = ft_strdup(&envp[i][ft_strlen(name) + 1]);
-		++i;
-	}
 	if (res == 0)
-		res = ft_strdup("");
+	{
+		node = search_node_by_key(g_global_var.envp_head, name);
+		if (node == 0)
+			res = ft_strdup("");
+		else
+			res = ft_strdup(node->value);
+	}
 	free(name);
 	return (res);
 }

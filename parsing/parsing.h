@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:18:02 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/15 15:38:33 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:24:11 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int			pipex_count(char *line);
 t_node		**init_token(int pipex_counter);
 
 // tokenizer.c
-t_node		**token2corpus(int pipex_counter, char *line, char **envp);
-t_node		**command_line(char *line, int *length, char **envp);
+t_node		**token2corpus(int pipex_counter, char *line);
+t_node		**command_line(char *line, int *length);
 void		normalize_file(char **cmd);
 int			is_file(char *cmd);
-t_node		*tokenizer(char *norm_command, char **envp);
+t_node		*tokenizer(char *norm_command);
 
 // parsing_error.c
 int			error_handling(char **corpus);
@@ -49,16 +49,16 @@ t_file_info	*extract_infile(char **command);
 t_file_info	*extract_outfile(char **command);
 
 // execute_dollar.c
-char		*find_env(char **envp, char *name);
+char		*find_env(char *name);
 char		*extract_name(char *line, int *e_idx);
 
 // handler_symbol.c
-void		handle_quote(char **cmd, char **envp);
+void		handle_quote(char **cmd);
 int			find_next_quote(char *cmd, char quote, int i);
 char		*split_by_normal(char *cmd, int s_idx, int e_idx);
 char		**divided_quote(char *cmd);
 char		*exclude_quote(char *cmd, char quote);
-char		*change_commed(char **envp, char *cmd, char value);
+char		*change_commed(char *cmd, char value);
 char		*append_commend(char *cmd, char *tmp);
 char		*ft_merge(char **divided);
 
@@ -73,4 +73,7 @@ char		**ft_split_group(char *s, int is_whitespace, int is_quote);
 void		file_info_free(t_file_info **head);
 void		token_free(t_node ***token);
 
+// main_utility.c
+void		init_env(int argc, char *argv[], char *envp[]);
+void		valid_command_line(char *line);
 #endif

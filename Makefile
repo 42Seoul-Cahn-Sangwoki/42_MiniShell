@@ -6,7 +6,7 @@
 #    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/15 15:49:39 by sangwoki         ###   ########.fr        #
+#    Updated: 2023/08/17 14:54:17 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ LINKING_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
 COMPILE_FLAGS = -I${HOME}/.brew/opt/readline/include
 NAME = minishell
 LIBFT = ./libft/libft.a
-SRCS = 	./main.c ./general_function.c ./main_utility.c\
+SRCS = 	./main.c ./general_function.c ./main_utility.c \
+		./env_list_function1.c \
+		./env_list_function2.c \
+		./env_list_function3.c \
 		./parsing/parsing_error.c \
 		./parsing/tokenizer.c \
 		./parsing/preprocessing.c \
@@ -30,10 +33,9 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c\
 		./parsing/token_free.c \
 		./signal/signal.c \
 		./signal/term_set.c \
-		
 
 OBJS = $(SRCS:.c=.o)
-INCS = interface.h \
+INCS = ./interface.h \
 		./parsing/parsing.h \
 		./signal/signal.h \
 

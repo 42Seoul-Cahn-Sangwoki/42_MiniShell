@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:34:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/15 15:39:41 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:24:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // 1. split by quote: cmd[next_quote]=' '-> split
 // 2. change each group considering $ and quote rule.
 // 3. merge group
-void	handle_quote(char **cmd, char **envp)
+void	handle_quote(char **cmd)
 {
 	char	**divided;
 	char	*ex_quote;
@@ -32,7 +32,7 @@ void	handle_quote(char **cmd, char **envp)
 		{
 			quote = divided[j][0];
 			ex_quote = exclude_quote(divided[j], quote);
-			divided[j] = change_commed(envp, ex_quote, quote);
+			divided[j] = change_commed(ex_quote, quote);
 			j++;
 		}
 		free(cmd[i]);
@@ -59,7 +59,7 @@ char	*exclude_quote(char *cmd, char quote)
 }
 
 // about command: gohome$HOME$USER, "  $HOME", " $", "    $?    "
-char	*change_commed(char **envp, char *cmd, char value)
+char	*change_commed(char *cmd, char value)
 {
 	char	*join_cmd;
 	char	*tmp;
@@ -73,7 +73,7 @@ char	*change_commed(char **envp, char *cmd, char value)
 	while (cmd[i])
 	{
 		if (cmd[i] == '$')
-			tmp = find_env(envp, extract_name(cmd, &i));
+			tmp = find_env(extract_name(cmd, &i));
 		else
 		{
 			s_idx = i;

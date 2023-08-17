@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 19:49:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/15 15:23:36 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:10:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	normalize_file(char **join_file)
 
 // handle_quote
 // token->commands = extract_command(vector, ft_strlen(norm_command));
-t_node	*tokenizer(char *command, char **envp)
+t_node	*tokenizer(char *command)
 {
 	char	**vector;
 	t_node	*token;
@@ -66,7 +66,7 @@ t_node	*tokenizer(char *command, char **envp)
 	vector = ft_split_group(command, TRUE, TRUE);
 	normalize_file(vector);
 	token->commands = extract_command(vector, ft_strlen(command));
-	handle_quote(token->commands, envp);
+	handle_quote(token->commands);
 	token->infile_head = extract_infile(vector);
 	token->outfile_head = extract_outfile(vector);
 	free_split(&vector);
@@ -74,7 +74,7 @@ t_node	*tokenizer(char *command, char **envp)
 	return (token);
 }
 
-t_node	**token2corpus(int pipex_counter, char *line, char **envp)
+t_node	**token2corpus(int pipex_counter, char *line)
 {
 	char	**corpus;
 	int		i;
@@ -87,7 +87,7 @@ t_node	**token2corpus(int pipex_counter, char *line, char **envp)
 	i = 0;
 	while (i < pipex_counter + 1)
 	{
-		token[i] = tokenizer(corpus[i], envp);
+		token[i] = tokenizer(corpus[i]);
 		i++;
 	}
 	token[i] = 0;
@@ -95,7 +95,7 @@ t_node	**token2corpus(int pipex_counter, char *line, char **envp)
 	return (token);
 }
 
-t_node	**command_line(char *line, int *length, char **envp)
+t_node	**command_line(char *line, int *length)
 {
 	t_node	**token;
 	int		pipex_counter;
@@ -103,7 +103,7 @@ t_node	**command_line(char *line, int *length, char **envp)
 	error_pipe(line);
 	pipex_counter = pipex_count(line);
 	*length = pipex_counter + 1;
-	token = token2corpus(pipex_counter, line, envp);
+	token = token2corpus(pipex_counter, line);
 	if (token == FALSE)
 		return (FALSE);
 	return (token);

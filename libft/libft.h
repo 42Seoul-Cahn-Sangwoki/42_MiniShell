@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:48:56 by sangwoki          #+#    #+#             */
-/*   Updated: 2022/11/14 13:41:11 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:56:16 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;	
-}t_list;
+}	t_list;
 
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
