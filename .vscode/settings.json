@@ -3,6 +3,7 @@
         "parsing.h": "c",
         "locale": "c",
         "interface.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "readline.h": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 14:21:18 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:38:15 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	valid_command_line(char *line)
 
 	token = command_line(line, &length);
 	if (token == 0)
-		print_stderr("missing: format");
+		print_stderr_no_exit("missing: format", FAIL);
 	execute_signal();
 	ft_execute(token, length);
 	token_free(&token);

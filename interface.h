@@ -14,8 +14,8 @@
 #define WRITE_BACK 1
 #define READ -1
 #define HERE_DOC -2
-#define SUCCESS 1
-#define FAIL 0
+#define SUCCESS 0
+#define FAIL 1
 
 typedef struct s_file_info
 {
@@ -50,13 +50,13 @@ typedef struct s_global
 t_global g_global_var;
 
 void        execute(t_node *cmds, int length); // 배열과 배열 크기(크기 꼭 리턴)
-void	    print_stderr(const char *error_print);
-void	    non_valid_error(char *error_print);
+void	    print_stderr(char *error_print);
+void    	print_stderr_no_exit(char *command, int code);
 void	    free_split(char ***split);
 t_env_node  *copy_env_return_head(char **envp);
 t_env_node  *get_node(const char *string);
 t_env_node  *search_node_by_key(t_env_node *head, const char *key);
-void        add_back(t_env_node **head, t_env_node *new_head);
+void        add_back(t_env_node **head, t_env_node *new);
 void        modify_env_value(t_env_node *node, const char *str);
 void        print_env_string_with_newline(t_env_node *node);
 void        print_all_env(t_env_node *head);
@@ -65,4 +65,9 @@ int         return_env_list_size(t_env_node *head);
 char        **make_origin_form_envp(t_env_node *head); // 연결리스트를 통해 원래 char **형태의 envp 만들기. 수정해도 원래 연결리스트에는 영향을 주지 않음.
 void        free_env_node(t_env_node *node);
 void        free_env_list(t_env_node **head);
+
+
+
+
+
 #endif

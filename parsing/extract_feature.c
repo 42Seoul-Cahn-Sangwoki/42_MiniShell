@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:39:58 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/15 14:26:00 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:40:36 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	**extract_command(char **command, int length)
 	i = 0;
 	j = 0;
 	tmp = (char *)malloc(sizeof(char) * (length * 2 + 1));
+	if (tmp == 0)
+		print_stderr("MALLOC");
 	while (command[i])
 	{
 		if (command[i][0] != '<' && command[i][0] != '>')
