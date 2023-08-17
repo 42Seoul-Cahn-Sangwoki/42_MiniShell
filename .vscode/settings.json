@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "termios.h": "c",
+        "execute.h": "c",
+        "__node_handle": "c",
+        "interface.h": "c",
+        "system_error": "c"
+    }
+}
