@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utility.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 14:21:18 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/17 20:26:31 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void	valid_command_line(char *line)
 	if (token == 0)
 		print_stderr("missing: format");
 	execute_signal();
-	ft_execute(token, length);
+	execute(token, length);
 	token_free(&token);
 }
