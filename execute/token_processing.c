@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 21:17:36 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 19:24:53 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,25 +84,26 @@ int	is_built_in(char *command)
 	return (0);
 }
 
-void	execute_built_in(char *command, char **parameter)
+int	execute_built_in(char *command, char **parameter)
 {
 	if (!ft_strncmp(command, "cd", COMPARE_NUMBER))
-		ft_cd(parameter[0]);
+		return (ft_cd(parameter));
 	if (!ft_strncmp(command, "echo", COMPARE_NUMBER))
-		ft_echo(parameter);
+		return (ft_echo(parameter));
 	if (!ft_strncmp(command, "pwd", COMPARE_NUMBER))
-		ft_pwd(parameter);
+		return (ft_pwd(parameter));
 	if (!ft_strncmp(command, "export", COMPARE_NUMBER))
-		ft_export(parameter);
+		return (ft_export(parameter));
 	if (!ft_strncmp(command, "unset", COMPARE_NUMBER))
-		ft_unset(parameter);
+		return (ft_unset(parameter));
 	if (!ft_strncmp(command, "env", COMPARE_NUMBER))
-		ft_env(parameter);
+		return (ft_env(parameter));
 	if (!ft_strncmp(command, "exit", COMPARE_NUMBER))
-		ft_exit(parameter);
+		return (ft_exit(parameter));
+	return (0);
 }
 
-void	token_processing(t_node *token, int *pipe, int index, int length)
+void	token_processing(t_node *token, int **pipe, int index, int length)
 {
 	int		input_fd;
 	int		output_fd;
@@ -112,13 +113,21 @@ void	token_processing(t_node *token, int *pipe, int index, int length)
 	input_fd = return_input_fd(token->infile_head);
 	output_fd = return_output_fd(token->outfile_head);
 	if (input_fd != -1)
+	{
 		dup2(input_fd, 0);
-	else if (index < length - 1)
-		dup2(pipe[0], 0);
+	}
+	else if (index != 0)
+	{
+		close(pipe[index - 1][1]);
+		dup2(pipe[index - 1][0], 0);
+	}
 	if (output_fd != -1)
 		dup2(output_fd, 1);
 	else if (index < length - 1)
-		dup2(pipe[1], 1);
+	{
+		close(pipe[index][0]);
+		dup2(pipe[index][1], 1);
+	}
 	if (is_built_in(token->commands[0]))
 	{
 		execute_built_in(token->commands[0], token->commands);

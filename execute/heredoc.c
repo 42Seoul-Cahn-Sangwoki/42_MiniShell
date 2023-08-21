@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:41:22 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/21 15:13:44 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 16:35:35 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    create_heredoc_file(t_node *cmds, int length)
     i = 0;
     while(i < length)
     {
-        find = cmds->infile_head;
+        find = cmds[i].infile_head;
         while (find != NULL)
         {
             if (find->write_mode == HERE_DOC)

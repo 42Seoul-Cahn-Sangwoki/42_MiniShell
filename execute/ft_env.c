@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:58:28 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 20:19:48 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 19:47:10 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void    print_env_string_with_newline_have_value(t_env_node *node)
         printf("%s=%s\n", node->key, node->value);
 }
 
-// 모든 env 출력
 static void    print_all_env_have_value(t_env_node *head)
 {
     t_env_node  *search;
@@ -37,13 +36,10 @@ static void    print_all_env_have_value(t_env_node *head)
     }
 }
 
-void    ft_env(char **parameter) // value있는것만 출력
+int ft_env(char **parameter) // value있는것만 출력
 {
-
     if (parameter[1])
-    {
-        printf("ft_env needs no arguments or option\n");
-        return ;
-    }
+        return (set_exit_status(1, ft_strjoin("env: ", parameter[1]), "No such file or directory"));
     print_all_env_have_value(g_global_var.envp_head);
+    return (set_exit_status(0, NULL, NULL));
 }

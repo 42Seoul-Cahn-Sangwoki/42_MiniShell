@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/21 15:16:21 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 16:13:21 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
         free(pm->pipe_array[i]);
 		++i;
 	}
-    free(pm->pipe_array);
-	i = 0;
 	while (i < length)
 	{
 		waitpid(pm->child_pid_array[i], NULL, 0);
 		++i;
 	}
+    free(pm->pipe_array);
+	i = 0;
     free(pm->child_pid_array);
     delete_tmp_file(cmds, length);
 }
