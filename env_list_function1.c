@@ -28,39 +28,23 @@ t_env_node  *get_node(const char *string)
     return (new_node);
 }
 
-<<<<<<< HEAD
-void    add_back(t_env_node **head, t_env_node *head_new)
-=======
 void    add_back(t_env_node **head, t_env_node *new)
->>>>>>> merge_test
 {
     t_env_node  *node;
 
     node = (*head);
-<<<<<<< HEAD
-	if (!node && !head_new)
-		return ;
-	if (!node)
-	{
-		(*head) = head_new;
-=======
+
 	if (!node && !new)
 		return ;
 	if (!node)
 	{
 		(*head) = new;
->>>>>>> merge_test
 		return ;
 	}
 	while ((*head)->next != 0)
 		(*head) = (*head)->next;
-<<<<<<< HEAD
-	(*head)->next = head_new;
-    head_new->prev = *head;
-=======
 	(*head)->next = new;
     new->prev = *head;
->>>>>>> merge_test
 	(*head) = node;
 }
 

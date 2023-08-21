@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+         #
+#    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/08/17 14:54:17 by sangwoki         ###   ########.fr        #
-=======
-#    Updated: 2023/08/17 20:17:54 by cahn             ###   ########.fr        #
->>>>>>> merge_test
+#    Created: 2023/08/21 14:40:18 by sangwoki          #+#    #+#              #
+#    Updated: 2023/08/21 14:40:20 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +33,6 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c \
 		./parsing/token_free.c \
 		./signal/signal.c \
 		./signal/term_set.c \
-<<<<<<< HEAD
-=======
 		./execute/execute_file_check.c \
 		./execute/execute.c \
 		./execute/execute_utility.c \
@@ -52,16 +46,12 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c \
 		./execute/heredoc.c \
 		./execute/parent_processing.c \
 		./execute/token_processing.c \
->>>>>>> merge_test
 
 OBJS = $(SRCS:.c=.o)
 INCS = ./interface.h \
 		./parsing/parsing.h \
 		./signal/signal.h \
-<<<<<<< HEAD
-=======
 		./execute/execute.h
->>>>>>> merge_test
 
 all : $(NAME)
 $(NAME) : $(OBJS)

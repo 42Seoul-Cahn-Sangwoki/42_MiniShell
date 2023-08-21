@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_file_check.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:39:10 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 20:56:06 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 14:40:02 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	find_execute_file(char **commands, char *path)
 	int		i;
 	char	*tmp;
 	char	*res;
-	
+
 	split = ft_split(path, ':');
 	i = -1;
 	while (split[++i])

@@ -11,17 +11,12 @@
 # include <signal.h>
 # include <string.h>
 
-#define WRITE_NEW 0
-#define WRITE_BACK 1
-#define READ -1
-#define HERE_DOC -2
-<<<<<<< HEAD
-#define SUCCESS 0
-#define FAIL 1
-=======
-#define SUCCESS 1
-#define FAIL 0
->>>>>>> merge_test
+# define WRITE_NEW 0
+# define WRITE_BACK 1
+# define READ -1
+# define HERE_DOC -2
+# define SUCCESS 1
+# define FAIL 0
 
 typedef struct s_file_info
 {
@@ -71,9 +66,5 @@ int         return_env_list_size(t_env_node *head);
 char        **make_origin_form_envp(t_env_node *head); // 연결리스트를 통해 원래 char **형태의 envp 만들기. 수정해도 원래 연결리스트에는 영향을 주지 않음.
 void        free_env_node(t_env_node *node);
 void        free_env_list(t_env_node **head);
-
-
-
-
 
 #endif

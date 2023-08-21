@@ -6,11 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/17 20:43:27 by sangwoki         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/17 23:36:25 by sangwoki         ###   ########.fr       */
->>>>>>> merge_test
+/*   Updated: 2023/08/21 14:30:45 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +56,6 @@
 // 	}
 // }
 
-<<<<<<< HEAD
-void	init_env(int argc, char *argv[], char *envp[])
-{
-	argv = 0;
-	argc = 0;
-	g_global_var.envp_head = copy_env_return_head(envp);
-	g_global_var.exit = 0;
-=======
 void	execute_shell(char ***command)
 {
 	char	**new_cmd;
@@ -97,7 +85,6 @@ void	init_env(int argc, char *argv[], char *envp[])
 	}
 	argv = 0;
 	argc = 0;
->>>>>>> merge_test
 }
 
 // ft_exeucte -> execute
@@ -108,17 +95,11 @@ void	valid_command_line(char *line)
 
 	token = command_line(line, &length);
 	if (token == 0)
-<<<<<<< HEAD
-		print_stderr_no_exit("missing: format", FAIL);
-	execute_signal();
-	// ft_execute(token, length);
-=======
 	{
 		print_stderr_no_exit("missing: format", FAIL);
 		return ;
 	}
 	execute_signal();
 	execute(token, length);
->>>>>>> merge_test
 	free(token);
 }
