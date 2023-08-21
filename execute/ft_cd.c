@@ -6,17 +6,12 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:19:11 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 16:59:07 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 14:54:14 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../interface.h"
 #include "execute.h"
-
-// cd => home
-// cd . => no change
-// cd ~ => home
-// cd .. => parent
 
 void    update_pwd()
 {
