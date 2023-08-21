@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:41:22 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 17:18:14 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 15:13:44 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char    *return_tmpfile_name_by_here_document(char *end_string)
     char    *tmp_file;
 	
     tmp_file = make_no_overlap_tmpfile();
-    tmp_fd = open(tmp_file, 1, O_WRONLY | O_CREAT | O_TRUNC, 00777);
+    tmp_fd = open(tmp_file, O_WRONLY | O_CREAT | O_TRUNC, 00777);
     if (tmp_fd < 0)
         print_stderr(tmp_file);
 	while (1)
@@ -73,7 +73,6 @@ char    *return_tmpfile_name_by_here_document(char *end_string)
 		line = readline("> ");
 		if (line)
 		{
-            write(1, "\n", 1);
 			if (!ft_strncmp(end_string, line, ft_strlen(line)))
 			{
 				free(line);
