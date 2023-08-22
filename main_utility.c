@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 16:31:17 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:08:56 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	execute_shell(char ***command)
 {
 	char	**new_cmd;
 
+	if ((*command)[0] == 0)
+		return ;
 	if (ft_strncmp((*command)[0], "./minishell", ft_strlen("./minishell")))
 		return ;
 	new_cmd = (char **)malloc(sizeof(char *) * 3);
@@ -87,8 +89,10 @@ void	init_env(int argc, char *argv[], char *envp[])
 	else
 	{
 		node = search_node_by_key(g_global_var.envp_head, "SHLVL");
-		modify_env_value(node, ft_itoa(ft_atoi(node->value) + 1));
+		shlvl = ft_itoa(ft_atoi(node->value) + 1);
+		modify_env_value(node, shlvl);
 	}
+	free(shlvl);
 	argv = 0;
 	argc = 0;
 }
