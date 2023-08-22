@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/17 14:54:17 by sangwoki         ###   ########.fr        #
+#    Created: 2023/08/21 14:40:18 by sangwoki          #+#    #+#              #
+#    Updated: 2023/08/22 16:27:56 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,25 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c \
 		./parsing/token_free.c \
 		./signal/signal.c \
 		./signal/term_set.c \
+		./execute/execute_file_check.c \
+		./execute/execute.c \
+		./execute/execute_utility.c \
+		./execute/ft_cd.c \
+		./execute/ft_echo.c \
+		./execute/ft_env.c \
+		./execute/ft_exit.c \
+		./execute/ft_export.c \
+		./execute/ft_pwd.c \
+		./execute/ft_unset.c \
+		./execute/heredoc.c \
+		./execute/parent_processing.c \
+		./execute/token_processing.c \
 
 OBJS = $(SRCS:.c=.o)
 INCS = ./interface.h \
 		./parsing/parsing.h \
 		./signal/signal.h \
+		./execute/execute.h
 
 all : $(NAME)
 $(NAME) : $(OBJS)
