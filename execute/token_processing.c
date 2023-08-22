@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 16:18:08 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 20:00:32 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	token_processing(t_node *token, int **pipe, int index, int length)
 	char	**argu_envp;
 
 	pipe_processing(token, pipe, index, length);
+	if (!token->commands[0])
+		exit(set_exit_status(0, NULL, NULL));
 	if (is_built_in(token->commands[0]))
 	{
 		execute_built_in(token->commands[0], token->commands);
@@ -112,5 +114,4 @@ void	token_processing(t_node *token, int **pipe, int index, int length)
 	}
 	argu_envp = make_origin_form_envp(g_global_var.envp_head);
 	execve(token->commands[0], token->commands, argu_envp);
-	print_stderr("execve");
 }

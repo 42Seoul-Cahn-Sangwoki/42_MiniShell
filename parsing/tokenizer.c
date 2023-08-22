@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:39:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 20:44:02 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:58:42 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	tokenizer(t_node *token, char *command)
 	token->infile_head = extract_infile(vector, &error);
 	token->outfile_head = extract_outfile(vector, &error);
 	free_split(&vector);
-	free(command);
 	return (error);
 }
 
@@ -87,7 +86,7 @@ t_node	*token2corpus(int pipex_counter, char *line, int *error)
 			*error = 1;
 		i++;
 	}
-	free(corpus);
+	free_split(&corpus);
 	return (token);
 }
 
@@ -104,7 +103,7 @@ t_node	*command_line(char *line, int *length)
 	token = token2corpus(pipex_counter, line, &error);
 	if (error)
 	{
-		// free_token
+		free_token(token, *length);
 		return (FALSE);
 	}
 	if (token == FALSE)
