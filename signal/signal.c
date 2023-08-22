@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/22 11:48:37 by sangwoki          #+#    #+#             */
+/*   Updated: 2023/08/22 11:49:47 by sangwoki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include"signal.h"
 #include <readline/readline.h>
@@ -56,12 +66,4 @@ void	execute_parent_signal(void)
 	term_echo_on();
 	signal(SIGINT, execute_parent_hanlder);
 	signal(SIGQUIT, execute_parent_hanlder);
-}
-
-// default is 0
-void	default_signal(void)
-{
-	term_echo_off();
-	signal(SIGINT, default_handler);
-	signal(SIGQUIT, SIG_IGN);
 }
