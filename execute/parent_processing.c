@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 13:53:58 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 16:19:23 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,37 @@ void	allocate_process_manage(t_process_manage *pm, int length)
 	}
 }
 
-void    delete_tmp_file(t_node *cmds, int length)
+void	delete_tmp_file(t_node *cmds, int length)
 {
-    int         i;
-    t_file_info *find;
+	int			i;
+	t_file_info	*find;
 
-    i = 0;
-    while (i < length)
-    {
-        find = cmds->infile_head;
-        while (find != NULL)
-        {
-            if (find->write_mode == HERE_DOC)
-                if (unlink(find->file_name))
-                    print_stderr(find->file_name);
-        }
-        ++i;
-    }
+	i = 0;
+	while (i < length)
+	{
+		find = cmds->infile_head;
+		while (find != NULL)
+		{
+			if (find->write_mode == HERE_DOC)
+				if (unlink(find->file_name))
+					print_stderr(find->file_name);
+		}
+		++i;
+	}
+}
+
+void	close_all_pipe(int **pipe_array, int length)
+{
+	int	i;
+
+	i = 0;
+	while (i < length - 1)
+	{
+		close(pipe_array[i][0]);
+		close(pipe_array[i][1]);
+		free(pipe_array[i]);
+		++i;
+	}
 }
 
 void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
@@ -64,10 +78,10 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 	{
 		close(pm->pipe_array[i][0]);
 		close(pm->pipe_array[i][1]);
-        free(pm->pipe_array[i]);
+		free(pm->pipe_array[i]);
 		++i;
 	}
-    free(pm->pipe_array);
+	free(pm->pipe_array);
 	execute_parent_signal();
 	i = 0;
 	while (i < length)
@@ -80,6 +94,6 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 		waitpid(pm->child_pid_array[i], NULL, 0);
 		++i;
 	}
-    free(pm->child_pid_array);
-    delete_tmp_file(cmds, length);
+	free(pm->child_pid_array);
+	delete_tmp_file(cmds, length);
 }

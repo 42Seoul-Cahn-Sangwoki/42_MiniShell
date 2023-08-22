@@ -6,7 +6,7 @@
 #    By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/17 20:17:54 by cahn             ###   ########.fr        #
+#    Updated: 2023/08/22 15:35:27 by cahn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c \
 		./execute/execute.c \
 		./execute/execute_utility.c \
 		./execute/ft_cd.c \
+		./execute/ft_cd_utility.c \
 		./execute/ft_echo.c \
 		./execute/ft_env.c \
 		./execute/ft_exit.c \

@@ -6,14 +6,14 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:39:10 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 14:28:02 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 14:29:36 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../interface.h"
 #include "execute.h"
 
-char	*find_path()
+char	*find_path(void)
 {
 	t_env_node	*find;
 
@@ -27,7 +27,7 @@ int	find_execute_file(char **commands, char *path)
 	int		i;
 	char	*tmp;
 	char	*res;
-	
+
 	split = ft_split(path, ':');
 	i = -1;
 	while (split[++i])

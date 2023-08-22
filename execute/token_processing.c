@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 14:09:47 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 16:18:08 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,81 +65,51 @@ int	return_output_fd(t_file_info *head)
 	return (open(head->file_name, O_WRONLY | O_CREAT | O_APPEND, 00777));
 }
 
-int	is_built_in(char *command)
-{
-	if (!ft_strncmp(command, "cd", COMPARE_NUMBER))
-		return (1);
-	if (!ft_strncmp(command, "echo", COMPARE_NUMBER))
-		return (1);
-	if (!ft_strncmp(command, "pwd", COMPARE_NUMBER))
-		return (1);
-	if (!ft_strncmp(command, "export", COMPARE_NUMBER))
-		return (1);
-	if (!ft_strncmp(command, "unset", COMPARE_NUMBER))
-		return (1);
-	if (!ft_strncmp(command, "env", COMPARE_NUMBER))
-		return (1);
-	if (!ft_strncmp(command, "exit", COMPARE_NUMBER))
-		return (1);
-	return (0);
-}
-
-int	execute_built_in(char *command, char **parameter)
-{
-	if (!ft_strncmp(command, "cd", COMPARE_NUMBER))
-		return (ft_cd(parameter));
-	if (!ft_strncmp(command, "echo", COMPARE_NUMBER))
-		return (ft_echo(parameter));
-	if (!ft_strncmp(command, "pwd", COMPARE_NUMBER))
-		return (ft_pwd(parameter));
-	if (!ft_strncmp(command, "export", COMPARE_NUMBER))
-		return (ft_export(parameter));
-	if (!ft_strncmp(command, "unset", COMPARE_NUMBER))
-		return (ft_unset(parameter));
-	if (!ft_strncmp(command, "env", COMPARE_NUMBER))
-		return (ft_env(parameter));
-	if (!ft_strncmp(command, "exit", COMPARE_NUMBER))
-		return (ft_exit(parameter));
-	return (0);
-}
-
-void	token_processing(t_node *token, int **pipe, int index, int length)
+void	pipe_processing(t_node *token, int **pipe, int index, int length)
 {
 	int		input_fd;
 	int		output_fd;
-	char	*path;
-	char	**argu_envp;
 
 	input_fd = return_input_fd(token->infile_head);
 	output_fd = return_output_fd(token->outfile_head);
 	if (input_fd != -1)
 	{
 		dup2(input_fd, 0);
+		close(input_fd);
 	}
 	else if (index != 0)
-	{
-		close(pipe[index - 1][1]);
 		dup2(pipe[index - 1][0], 0);
-	}
 	if (output_fd != -1)
-		dup2(output_fd, 1);
-	else if (index < length - 1)
 	{
-		close(pipe[index][0]);
-		dup2(pipe[index][1], 1);
+		dup2(output_fd, 1);
+		close(output_fd);
 	}
+	else if (index < length - 1)
+		dup2(pipe[index][1], 1);
+	close_all_pipe(pipe, length);
+}
+
+void	token_processing(t_node *token, int **pipe, int index, int length)
+{
+	char	*path;
+	char	**argu_envp;
+
+	pipe_processing(token, pipe, index, length);
 	if (is_built_in(token->commands[0]))
 	{
 		execute_built_in(token->commands[0], token->commands);
 		exit(g_global_var.exit);
 	}
 	path = find_path();
-	if (access(token->commands[0], X_OK))	
+	if (access(token->commands[0], X_OK))
+	{
 		if (!find_execute_file(token->commands, path))
 		{
-			set_exit_status(127, ft_strdup(token->commands[0]), "command not found");
+			set_exit_status(127, ft_strdup(token->commands[0]), \
+					"command not found");
 			exit(g_global_var.exit);
 		}
+	}
 	argu_envp = make_origin_form_envp(g_global_var.envp_head);
 	execve(token->commands[0], token->commands, argu_envp);
 	print_stderr("execve");
