@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_processing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 21:09:24 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 12:12:38 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,10 @@ void	token_processing(t_node *token, int *pipe, int index, int length)
 	argu_envp = make_origin_form_envp(g_global_var.envp_head);
 	execve(token->commands[0], token->commands, argu_envp);
 	print_stderr("execve");
+	// signal 발생해야 함... 
 }
+
+// bash-3.2$ sdfsdfsdf
+// bash: sdfsdfsdf: command not found
+// bash-3.2$ echo $?
+// 127
