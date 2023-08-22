@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
+#    By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/21 14:40:18 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/22 16:27:56 by sangwoki         ###   ########.fr        #
+#    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
+#    Updated: 2023/08/22 16:43:37 by cahn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -fsanitize=address
 LINKING_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
 COMPILE_FLAGS = -I${HOME}/.brew/opt/readline/include
 NAME = minishell
@@ -37,6 +37,7 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c \
 		./execute/execute.c \
 		./execute/execute_utility.c \
 		./execute/ft_cd.c \
+		./execute/ft_cd_utility.c \
 		./execute/ft_echo.c \
 		./execute/ft_env.c \
 		./execute/ft_exit.c \
