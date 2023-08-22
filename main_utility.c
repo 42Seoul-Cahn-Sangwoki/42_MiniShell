@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 23:36:25 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:01:29 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	execute_shell(char ***command)
 		return ;
 	new_cmd = (char **)malloc(sizeof(char *) * 3);
 	new_cmd[0] = ft_strdup((*command)[0]);
-	new_cmd[1] = search_node_by_key(g_global_var.envp_head, "SHLVL")->value;
+	new_cmd[1] = ft_strdup(search_node_by_key(g_global_var.envp_head, \
+	"SHLVL")->value);
 	new_cmd[2] = 0;
 	free_split(command);
 	(*command) = new_cmd;
@@ -82,6 +83,11 @@ void	init_env(int argc, char *argv[], char *envp[])
 		node = search_node_by_key(g_global_var.envp_head, "SHLVL");
 		shlvl = ft_itoa(ft_atoi(argv[1]) + 1);
 		modify_env_value(node, shlvl);
+	}
+	else
+	{
+		node = search_node_by_key(g_global_var.envp_head, "SHLVL");
+		modify_env_value(node, ft_itoa(ft_atoi(node->value) + 1));
 	}
 	argv = 0;
 	argc = 0;

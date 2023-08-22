@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:57:58 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/21 20:19:35 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 13:51:00 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,6 @@ int set_exit_status(int code, char *perror_cmd, char *error_message)
         printf(": %s\n", error_message);
     free(perror_cmd);
     return (g_global_var.exit);
-}
-
-void    down_shell_level()
-{
-    t_env_node  *node;
-    int         level;
-    char        *new_level;
-
-    node = search_node_by_key(g_global_var.envp_head, "SHLVL");
-    level = ft_atoi(node->value);
-    level--;
-    new_level = ft_itoa(level);
-    modify_env_value(node, new_level);
-    free(new_level);
 }
 
 int ft_exit(char **parameter)
