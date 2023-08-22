@@ -15,8 +15,8 @@
 #define WRITE_BACK 1
 #define READ -1
 #define HERE_DOC -2
-#define SUCCESS 1
-#define FAIL 0
+#define SUCCESS 0
+#define FAIL 1
 
 typedef struct s_file_info
 {

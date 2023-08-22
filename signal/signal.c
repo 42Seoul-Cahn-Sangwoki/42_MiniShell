@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 11:48:37 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 11:49:47 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:09:50 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ void	default_handler(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_global_var.exit = (128 | signum % 256);
+		g_global_var.exit = FAIL;
 	}
 }
 
 void	execute_signal(void)
 {
 	term_echo_off();
+	g_global_var.exit = SUCCESS;
 	signal(SIGINT, execute_handler);
 	signal(SIGQUIT, execute_handler);
 }
