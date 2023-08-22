@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:34:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 16:20:11 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:07:40 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	handle_quote(char **cmd)
 	int		i;
 	int		j;
 
+	if (cmd == 0)
+		return ;
 	i = 0;
 	while (cmd[i])
 	{
