@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:48:03 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 17:40:29 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:22:22 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**divided_quote(char *cmd)
 
 	i = 0;
 	group_count = 0;
-	divided = (char **)malloc(sizeof(char *) * ft_strlen(cmd));
+	divided = (char **)malloc(sizeof(char *) * (ft_strlen(cmd) + 1));
 	while (cmd[i])
 	{
 		s_idx = i;

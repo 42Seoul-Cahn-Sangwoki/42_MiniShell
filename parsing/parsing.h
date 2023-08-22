@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:31:13 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/21 14:32:10 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:25:22 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_node		*token2corpus(int pipex_counter, char *line);
 t_node		*command_line(char *line, int *length);
 void		normalize_file(char **cmd);
 int			is_file(char *cmd);
-void        tokenizer(t_node *token, char *command);
+void		tokenizer(t_node *token, char *command);
 
 // parsing_error.c
 int			error_handling(char **corpus);
