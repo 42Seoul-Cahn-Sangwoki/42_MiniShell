@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:26:47 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 19:42:01 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 21:16:53 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ void	one_built_in_processing(t_node *cmds)
 		close(output_fd);
 	}
 	execute_built_in(cmds[0].commands[0], cmds[0].commands);
+	dup2
 }
 
 int	one_argument_processing(t_node *cmds)
 {
 	char	*path;
 
+	if (!cmds[0].commands[0])
+		return (1);
 	if (is_built_in(cmds[0].commands[0]))
 	{
 		one_built_in_processing(cmds);

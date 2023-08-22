@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 19:15:26 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 20:58:18 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 	i = 0;
 	while (i < length)
 	{
-		if (!ft_strncmp(cmds[i].commands[0], "./minishell", 11))
+		if (cmds[i].commands[0] != NULL && !ft_strncmp(cmds[i].commands[0], "./minishell", 11))
 		{
 			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);

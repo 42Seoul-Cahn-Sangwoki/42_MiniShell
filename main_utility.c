@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 20:15:03 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 20:46:30 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	execute_shell(char ***command)
 {
 	char	**new_cmd;
 
+	if ((*command) == 0 || (*command)[0] == 0)
+		return ;
 	if (ft_strncmp((*command)[0], "./minishell", ft_strlen("./minishell")))
 		return ;
 	new_cmd = (char **)malloc(sizeof(char *) * 3);

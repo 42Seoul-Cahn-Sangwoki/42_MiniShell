@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:54:17 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 11:48:23 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:51:19 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_file_info	*get_info(char *file_name, int write_mode)
 {
 	t_file_info	*info;
 
-	if (file_name[0] == 0 || file_name == 0)
-		print_stderr_no_exit("missing: file name", FAIL);
+	if (file_name[0] == 0 || file_name == 0 || file_name[0] == '$')
+		return (0);
 	info = (t_file_info *)malloc(sizeof(t_file_info));
 	if (info == 0)
 		print_stderr("MALLOC");

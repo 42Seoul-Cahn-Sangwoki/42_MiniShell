@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:00:51 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 17:04:50 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 20:30:44 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int			return_env_list_size(t_env_node *head);
 char		**make_origin_form_envp(t_env_node *head);
 void		free_env_node(t_env_node *node);
 void		free_env_list(t_env_node **head);
+void		free_token(t_node *token, int length);
 
 #endif

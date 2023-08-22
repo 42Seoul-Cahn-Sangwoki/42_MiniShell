@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:39:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 19:29:06 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 20:44:49 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	is_file(char *cmd)
 		ret = 2;
 	else if (ft_strncmp(cmd, ">", 1) == 0 || ft_strncmp(cmd, "<", 1) == 0)
 		ret = 1;
-	if (ret != 0 && cmd[ret] == '$')
-		print_stderr_no_exit("$ can't be fd", FAIL);
 	if (ret != 0 && cmd[ret] != 0)
 		return (0);
 	return (ret);
@@ -41,8 +39,6 @@ void	normalize_file(char **join_file)
 	{
 		if (next_is_name == TRUE)
 		{
-			if (join_file[i][0] == '\'' || join_file[i][0] == '\"')
-				print_stderr_no_exit("don't have fd", FAIL);
 			join_file[i - 1] = append_commend(join_file[i - 1], join_file[i]);
 			join_file[i] = ft_strdup(" ");
 			next_is_name = FALSE;
@@ -51,27 +47,29 @@ void	normalize_file(char **join_file)
 			next_is_name = TRUE;
 		i++;
 	}
-	if (next_is_name == TRUE)
-		print_stderr_no_exit("dont't have fd", FAIL);
+	handle_quote(join_file);
 }
 
 // handle_quote
 // token->commands = extract_command(vector, ft_strlen(norm_command));
-void	tokenizer(t_node *token, char *command)
+int	tokenizer(t_node *token, char *command)
 {
 	char	**vector;
+	int		error;
 
+	error = 0;
 	vector = ft_split_group(command, TRUE, TRUE);
 	normalize_file(vector);
 	token->commands = extract_command(vector, ft_strlen(command));
 	execute_shell(&(token->commands));
 	handle_quote(token->commands);
-	token->infile_head = extract_infile(vector);
-	token->outfile_head = extract_outfile(vector);
+	token->infile_head = extract_infile(vector, &error);
+	token->outfile_head = extract_outfile(vector, &error);
 	free_split(&vector);
+	return (error);
 }
 
-t_node	*token2corpus(int pipex_counter, char *line)
+t_node	*token2corpus(int pipex_counter, char *line, int *error)
 {
 	char	**corpus;
 	int		i;
@@ -84,7 +82,8 @@ t_node	*token2corpus(int pipex_counter, char *line)
 	i = 0;
 	while (i < pipex_counter + 1)
 	{
-		tokenizer(token + i, corpus[i]);
+		if (tokenizer(token + i, corpus[i]) == 1)
+			*error = 1;
 		i++;
 	}
 	free_split(&corpus);
@@ -95,11 +94,18 @@ t_node	*command_line(char *line, int *length)
 {
 	t_node	*token;
 	int		pipex_counter;
+	int		error;
 
 	error_pipe(line);
 	pipex_counter = pipex_count(line);
 	*length = pipex_counter + 1;
-	token = token2corpus(pipex_counter, line);
+	error = 0;
+	token = token2corpus(pipex_counter, line, &error);
+	if (error)
+	{
+		free_token(token, *length);
+		return (FALSE);
+	}
 	if (token == FALSE)
 		return (FALSE);
 	return (token);
