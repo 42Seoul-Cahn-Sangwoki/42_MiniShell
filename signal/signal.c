@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 11:43:41 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 20:23:44 by sangwoki         ###   ########.fr       */
+/*   Created: 2023/08/22 11:48:37 by sangwoki          #+#    #+#             */
+/*   Updated: 2023/08/22 12:09:50 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,27 @@ void	execute_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		ft_putchar_fd('\n', STDOUT_FILENO);
-		g_global_var.exit = signum % 256;
-		exit(signum % 256);
+		g_global_var.exit = (128 | signum % 256);
+		exit((128 | signum % 256));
 	}
 	else if (signum == SIGQUIT)
 	{
-		ft_putstr_fd("Quit: 3\n", STDIN_FILENO);
-		g_global_var.exit = signum % 256;
-		exit(signum % 256);
+		g_global_var.exit = (128 | signum % 256);
+		exit((128 | signum % 256));
+	}
+}
+
+void	execute_parent_hanlder(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		g_global_var.exit = (128 | signum % 256);
+	}
+	else if (signum == SIGQUIT)
+	{
+		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
+		g_global_var.exit = (128 | signum % 256);
 	}
 }
 
@@ -38,20 +50,21 @@ void	default_handler(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_global_var.exit = signum % 256;
+		g_global_var.exit = FAIL;
 	}
 }
 
 void	execute_signal(void)
 {
-	term_echo_on();
+	term_echo_off();
+	g_global_var.exit = SUCCESS;
 	signal(SIGINT, execute_handler);
 	signal(SIGQUIT, execute_handler);
 }
 
-void	default_signal(void)
+void	execute_parent_signal(void)
 {
-	term_echo_off();
-	signal(SIGINT, default_handler);
-	signal(SIGQUIT, SIG_IGN);
+	term_echo_on();
+	signal(SIGINT, execute_parent_hanlder);
+	signal(SIGQUIT, execute_parent_hanlder);
 }
