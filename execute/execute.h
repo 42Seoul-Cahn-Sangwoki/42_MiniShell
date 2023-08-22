@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:45:14 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/21 19:39:48 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 14:25:48 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ void	allocate_process_manage(t_process_manage *pm, int length);
 char    *return_tmpfile_name_by_here_document(char *end_string);
 char	*ft_ultoa(unsigned long long n);
 char	*find_path();
-void	find_execute_file(char **commands, char *path);
+int     find_execute_file(char **commands, char *path);
 char    *make_no_overlap_tmpfile(void);
 void    create_heredoc_file(t_node *cmds, int length);
 void    delete_tmp_file(t_node *cmds, int length);
+int	    is_valid_execute_file(char	*commands, char *path);
+
 
 int     update_pwd();
 int	    is_built_in(char *command);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:57:58 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 13:51:00 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:59:58 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int ft_exit(char **parameter)
     g_global_var.exit = 0;
     if (!parameter[1])
     {
-        down_shell_level();
         printf("exit\n");
         exit(0);
     }
@@ -96,14 +95,12 @@ int ft_exit(char **parameter)
     else if (!is_numeric_string(parameter[1]))
     {
         set_exit_status(255, ft_strdup("exit"), "numeric argument requied");
-        down_shell_level();
         printf("exit\n");
         exit(255);
     }
     exit_code = ft_atol_for_exit(parameter[1]);
     if (g_global_var.exit)
         set_exit_status(g_global_var.exit, ft_strjoin("exit: ", parameter[1]), "numeric argument required");
-    down_shell_level();
     printf("exit\n");
     exit(exit_code);
 }

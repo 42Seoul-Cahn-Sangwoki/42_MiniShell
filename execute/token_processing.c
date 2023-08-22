@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/21 19:24:53 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 14:09:47 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,11 @@ void	token_processing(t_node *token, int **pipe, int index, int length)
 	}
 	path = find_path();
 	if (access(token->commands[0], X_OK))	
-		find_execute_file(token->commands, path);
-	if (token->commands[0] == NULL)
-		print_stderr("Commands not found");
+		if (!find_execute_file(token->commands, path))
+		{
+			set_exit_status(127, ft_strdup(token->commands[0]), "command not found");
+			exit(g_global_var.exit);
+		}
 	argu_envp = make_origin_form_envp(g_global_var.envp_head);
 	execve(token->commands[0], token->commands, argu_envp);
 	print_stderr("execve");

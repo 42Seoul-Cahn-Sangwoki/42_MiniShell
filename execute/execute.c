@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:26:47 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/21 20:14:51 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 14:26:04 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,27 @@ void	one_built_in_processing(t_node *cmds)
 	if (output_fd != -1)
 		dup2(output_fd, 1);
 	execute_built_in(cmds[0].commands[0], cmds[0].commands);
-	delete_tmp_file(cmds, 1);
 }
 
+int	one_argument_processing(t_node *cmds)
+{
+	char	*path;
+	
+	if (is_built_in(cmds[0].commands[0]))
+	{
+		one_built_in_processing(cmds);
+		return (1);
+	}
+	path = find_path();
+	if (access(cmds->commands[0], X_OK))	
+		if (!is_valid_execute_file(cmds->commands[0], path))
+		{
+			free(path);
+			return (set_exit_status(127, ft_strdup(cmds->commands[0]), "command not found"));
+		}
+	free(path);
+	return (0);
+}
 
 void    execute(t_node *cmds, int length)
 {
@@ -35,10 +53,13 @@ void    execute(t_node *cmds, int length)
 	int					i;
 
 	create_heredoc_file(cmds, length);
-	if (length == 1 && is_built_in(cmds[0].commands[0]))
+	if (length == 1)
 	{
-		one_built_in_processing(cmds);
-		return ;
+		if (one_argument_processing(cmds))
+		{
+			delete_tmp_file(cmds, 1);
+			return ;
+		}
 	}
 	allocate_process_manage(&pm, length);
 	i = 0;
