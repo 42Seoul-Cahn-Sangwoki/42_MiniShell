@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utility.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 16:27:46 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:23:20 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,35 @@
 #include"parsing/parsing.h"
 #include"signal/signal.h"
 
-// void	ft_execute(t_node *token, int length)
-// {
-// 	int			i;
-// 	int			cmd_idx;
-// 	t_file_info	*head1;
-// 	t_file_info	*head2;
+void	free_file_node(t_file_info **head)
+{
+	t_file_info	*search;
+	t_file_info	*tmp;
 
-// 	printf("length : %d\n", length);
-// 	i = 0;
-// 	while (token[i])
-// 	{
-// 		printf("pipe: ");
-// 		cmd_idx = 0;
-// 		while (token[i].commands[cmd_idx])
-// 		{
-// 			printf("[%s] ", token[i].commands[cmd_idx]);
-// 			cmd_idx++;
-// 		}
-// 		printf("\n");
-// 		head1 = token[i].infile_head;
-// 		if (head1 != 0)
-// 		{
-// 			while (head1)
-// 			{
-// 				printf("[%s %d]\n", head1.file_name, head1.write_mode);
-// 				head1 = head1.next;
-// 			}
-// 		}
-// 		printf("\n\n\n");
-// 		head2 = token[i].outfile_head;
-// 		if (head2 != 0)
-// 		{
-// 			while (head2)
-// 			{
-// 				printf("[%s %d]\n", head2.file_name, head2.write_mode);
-// 				head2 = head2.next;
-// 			}
-// 		}
-// 		i++;
-// 	}
-// }
+	search = *head;
+	while (search != NULL)
+	{
+		tmp = search->next;
+		free(search->file_name);
+		free(search);
+		search = tmp;
+	}
+}
+
+void	free_token(t_node *token, int length)
+{
+	int	i;
+
+	i = 0;
+	while (i < length)
+	{
+		free_split(&token[i].commands);
+		free_file_node(&token[i].infile_head);
+		free_file_node(&token[i].outfile_head);
+		++i;
+	}
+	free(token);
+}
 
 void	execute_shell(char ***command)
 {
@@ -83,17 +71,19 @@ void	init_env(int argc, char *argv[], char *envp[])
 		node = search_node_by_key(g_global_var.envp_head, "SHLVL");
 		shlvl = ft_itoa(ft_atoi(argv[1]) + 1);
 		modify_env_value(node, shlvl);
+		free(shlvl);
 	}
 	else
 	{
 		node = search_node_by_key(g_global_var.envp_head, "SHLVL");
-		modify_env_value(node, ft_itoa(ft_atoi(node->value) + 1));
+		shlvl = ft_itoa(ft_atoi(node->value) + 1);
+		modify_env_value(node, shlvl);
+		free(shlvl);
 	}
 	argv = 0;
 	argc = 0;
 }
 
-// ft_exeucte -> execute
 void	valid_command_line(char *line)
 {
 	int		length;
@@ -107,5 +97,5 @@ void	valid_command_line(char *line)
 	}
 	execute_signal();
 	execute(token, length);
-	free(token);
+	free_token(token, length);
 }

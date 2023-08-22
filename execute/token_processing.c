@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 16:18:08 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 17:14:42 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,4 @@ void	token_processing(t_node *token, int **pipe, int index, int length)
 	}
 	argu_envp = make_origin_form_envp(g_global_var.envp_head);
 	execve(token->commands[0], token->commands, argu_envp);
-	print_stderr("execve");
 }

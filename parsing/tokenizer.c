@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:39:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/21 14:39:28 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:29:06 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	tokenizer(t_node *token, char *command)
 	token->infile_head = extract_infile(vector);
 	token->outfile_head = extract_outfile(vector);
 	free_split(&vector);
-	free(command);
 }
 
 t_node	*token2corpus(int pipex_counter, char *line)
@@ -88,7 +87,7 @@ t_node	*token2corpus(int pipex_counter, char *line)
 		tokenizer(token + i, corpus[i]);
 		i++;
 	}
-	free(corpus);
+	free_split(&corpus);
 	return (token);
 }
 
