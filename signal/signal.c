@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 11:43:41 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 22:53:58 by sangwoki         ###   ########.fr       */
+/*   Created: 2023/08/22 11:48:37 by sangwoki          #+#    #+#             */
+/*   Updated: 2023/08/22 11:49:47 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	execute_parent_hanlder(int signum)
 	}
 	else if (signum == SIGQUIT)
 	{
-		ft_putstr_fd("Quit: 3\n", STDIN_FILENO);
+		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
 		g_global_var.exit = (128 | signum % 256);
 	}
 }
@@ -66,12 +66,4 @@ void	execute_parent_signal(void)
 	term_echo_on();
 	signal(SIGINT, execute_parent_hanlder);
 	signal(SIGQUIT, execute_parent_hanlder);
-}
-
-// default is 0
-void	default_signal(void)
-{
-	term_echo_off();
-	signal(SIGINT, default_handler);
-	signal(SIGQUIT, SIG_IGN);
 }
