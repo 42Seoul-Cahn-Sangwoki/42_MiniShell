@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:31:13 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 15:25:22 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:09:56 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int			pipex_count(char *line);
 t_node		*init_token(int pipex_counter);
 
 // tokenizer.c
-t_node		*token2corpus(int pipex_counter, char *line);
+t_node		*token2corpus(int pipex_counter, char *line, int *error);
 t_node		*command_line(char *line, int *length);
 void		normalize_file(char **cmd);
 int			is_file(char *cmd);
-void		tokenizer(t_node *token, char *command);
+int			tokenizer(t_node *token, char *command);
 
 // parsing_error.c
 int			error_handling(char **corpus);
@@ -45,8 +45,9 @@ char		*change_commend_utility(char *cmd, char value, int i, int s_idx);
 
 // extract_feature.c
 char		**extract_command(char **command, int length);
-t_file_info	*extract_infile(char **command);
-t_file_info	*extract_outfile(char **command);
+t_file_info	*extract_outfile(char **command, int *error);
+t_file_info	*extract_infile(char **command, int *error);
+char		*allocate_tmp(int length);
 
 // execute_dollar.c
 char		*find_env(char *name);

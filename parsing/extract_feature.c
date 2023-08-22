@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:39:58 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 17:40:36 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:06:51 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ char	**extract_command(char **command, int length)
 
 	i = 0;
 	j = 0;
-	tmp = (char *)malloc(sizeof(char) * (length * 2 + 1));
-	if (tmp == 0)
-		print_stderr("MALLOC");
+	tmp = allocate_tmp(length);
 	while (command[i])
 	{
 		if (command[i][0] != '<' && command[i][0] != '>')
@@ -40,12 +38,27 @@ char	**extract_command(char **command, int length)
 		}
 		i++;
 	}
-	extract = ft_split_group(tmp, TRUE, TRUE);
+	if (tmp[0])
+		extract = ft_split_group(tmp, TRUE, TRUE);
+	else
+		extract = 0;
 	free(tmp);
 	return (extract);
 }
 
-t_file_info	*extract_infile(char **command)
+char	*allocate_tmp(int length)
+{
+	char	*tmp;
+
+	tmp = (char *)malloc(sizeof(char) * (length * 2 + 1));
+	if (tmp == 0)
+		print_stderr("MALLOC");
+	tmp[0] = 0;
+	return (tmp);
+}
+
+
+t_file_info	*extract_infile(char **command, int *error)
 {
 	int			i;
 	t_file_info	*head;
@@ -53,7 +66,7 @@ t_file_info	*extract_infile(char **command)
 
 	i = 0;
 	head = 0;
-	while (command[i])
+	while (command[i] && (*error == 0))
 	{
 		if (ft_strncmp(command[i], "<<", 2) == 0)
 		{
@@ -65,12 +78,14 @@ t_file_info	*extract_infile(char **command)
 			node = get_info(&command[i][1], READ);
 			ft_push_back(&head, &node);
 		}
+		if (node == 0)
+			*error = 1;
 		i++;
 	}
 	return (head);
 }
 
-t_file_info	*extract_outfile(char **command)
+t_file_info	*extract_outfile(char **command, int *error)
 {
 	int			i;
 	t_file_info	*head;
@@ -78,7 +93,7 @@ t_file_info	*extract_outfile(char **command)
 
 	i = 0;
 	head = 0;
-	while (command[i])
+	while (command[i] && (*error == 0))
 	{
 		if (ft_strncmp(command[i], ">>", 2) == 0)
 		{
@@ -90,6 +105,8 @@ t_file_info	*extract_outfile(char **command)
 			node = get_info(&command[i][1], WRITE_NEW);
 			ft_push_back(&head, &node);
 		}
+		if (node == 0)
+			*error = 1;
 		i++;
 	}
 	return (head);
