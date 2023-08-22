@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:39:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 20:21:50 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:44:02 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	normalize_file(char **join_file)
 			next_is_name = TRUE;
 		i++;
 	}
+	handle_quote(join_file);
 }
 
 // handle_quote
