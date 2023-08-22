@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:45:14 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/21 19:39:48 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/22 13:50:36 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,6 @@ int     ft_env(char **parameter);
 int     ft_exit(char **parameter);
 int	    execute_built_in(char *command, char **parameter);
 int     set_exit_status(int code, char *perror_cmd, char *perror_file);
-
-
-
-
-
-
-
-
 
 
 #endif
