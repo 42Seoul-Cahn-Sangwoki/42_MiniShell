@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parent_processing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 23:52:19 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:13:21 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../interface.h"
 #include "execute.h"
-#include "../signal/signal.h"
 
 void	allocate_process_manage(t_process_manage *pm, int length)
 {
@@ -44,12 +43,13 @@ void    delete_tmp_file(t_node *cmds, int length)
     i = 0;
     while (i < length)
     {
-        find = cmds->infile_head;
+        find = cmds[i].infile_head;
         while (find != NULL)
         {
             if (find->write_mode == HERE_DOC)
                 if (unlink(find->file_name))
                     print_stderr(find->file_name);
+			find = find->next;
         }
         ++i;
     }
@@ -67,19 +67,13 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
         free(pm->pipe_array[i]);
 		++i;
 	}
-    free(pm->pipe_array);
-	execute_parent_signal();
-	i = 0;
 	while (i < length)
 	{
-		if (! ft_strncmp(cmds->commands[0], "./minishell", 11))
-		{
-			signal(SIGINT, SIG_IGN);
-			signal(SIGQUIT, SIG_IGN);
-		}
 		waitpid(pm->child_pid_array[i], NULL, 0);
 		++i;
 	}
+    free(pm->pipe_array);
+	i = 0;
     free(pm->child_pid_array);
     delete_tmp_file(cmds, length);
 }

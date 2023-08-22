@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:51:16 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 20:21:21 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 19:56:02 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int  parameter_check(char *para)
 }
 
 
-void    ft_export(char **parameter) // [0] next
+int ft_export(char **parameter) // [0] next
 {
     t_env_node  *find;
     t_env_node  *is_presence;
@@ -95,15 +95,12 @@ void    ft_export(char **parameter) // [0] next
     if (!parameter[1])
     {
         export_no_parameter();
-        return ;
+        return (set_exit_status(0, NULL, NULL));
     }
     if (!parameter_check(parameter[1]))
-    {
-        printf("export: not a valid identifier\n");
-        return ;
-    }
+        return (set_exit_status(1, ft_strdup("export"), "not a valid identifier"));
     if (parameter[1][0] == '_' && parameter[1][1] == 0)
-        return ;
+        return (set_exit_status(0, NULL, NULL));
     find = get_node(parameter[1]);
     is_presence = search_node_by_key(g_global_var.envp_head, find->key);
     if (!is_presence)
@@ -113,4 +110,5 @@ void    ft_export(char **parameter) // [0] next
         modify_env_value(is_presence, find->value);
         free_env_node(find);
     }
+    return (set_exit_status(0, NULL, NULL));
 }
