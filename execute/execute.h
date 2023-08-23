@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:45:14 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 17:05:38 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/23 14:49:20 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		ft_pwd(char **parameter);
 int		ft_export(char **parameter);
 int		ft_unset(char **parameter);
 int		ft_env(char **parameter);
-int		ft_exit(char **parameter);
-int		execute_built_in(char *command, char **parameter);
+int		ft_exit(char **parameter, int one);
+int		execute_built_in(char *command, char **parameter, int one);
 int		set_exit_status(int code, char *perror_cmd, char *perror_file);
 char	*get_absolute_path(void);
 char	*get_home_free_origin(char *origin);

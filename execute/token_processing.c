@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 20:00:32 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/23 14:50:11 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	token_processing(t_node *token, int **pipe, int index, int length)
 		exit(set_exit_status(0, NULL, NULL));
 	if (is_built_in(token->commands[0]))
 	{
-		execute_built_in(token->commands[0], token->commands);
+		execute_built_in(token->commands[0], token->commands, 0);
 		exit(g_global_var.exit);
 	}
 	path = find_path();

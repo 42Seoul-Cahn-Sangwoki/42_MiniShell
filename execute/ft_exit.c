@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:57:58 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 15:19:07 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/23 14:48:28 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,15 @@ int	set_exit_status(int code, char *perror_cmd, char *error_message)
 	return (g_global_var.exit);
 }
 
-int	ft_exit(char **parameter)
+int	ft_exit(char **parameter, int one)
 {
 	int	exit_code;
 
 	g_global_var.exit = 0;
 	if (!parameter[1])
 	{
-		printf("exit\n");
+		if (one)
+			printf("exit\n");
 		exit(0);
 	}
 	else if (parameter[1] && parameter[2])
@@ -105,13 +106,15 @@ int	ft_exit(char **parameter)
 	else if (!is_numeric_string(parameter[1]))
 	{
 		set_exit_status(255, ft_strdup("exit"), "numeric argument requied");
-		printf("exit\n");
+		if (one)
+			printf("exit\n");
 		exit(255);
 	}
 	exit_code = ft_atol_for_exit(parameter[1]);
 	if (g_global_var.exit)
 		set_exit_status(g_global_var.exit, ft_strjoin("exit: ", parameter[1]), \
 				"numeric argument required");
-	printf("exit\n");
+	if (one)
+		printf("exit\n");
 	exit(exit_code);
 }
