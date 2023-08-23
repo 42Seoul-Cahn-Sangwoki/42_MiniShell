@@ -6,33 +6,64 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 17:41:57 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:21:18 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	error_pipe(char *cmd)
+void	error_pipe(char *cmd, int *error)
 {
-	char	**pipe_split;
-	int		i;
+	int	i;
+	int	next_can_pipe;
 
 	i = 0;
-	while (cmd[i])
+	next_can_pipe = 0;
+	while (cmd[i] && *error == 0)
 	{
-		if (ft_strncmp(&cmd[i], "||", 2) == 0)
-			print_stderr_no_exit("| is consequtive", FAIL);
+		while (cmd[i] && (cmd[i] == ' ' || (9 <= cmd[i] && cmd[i] <= 13)))
+			i++;
+		if (cmd[i] == 0)
+			break ;
+		if (cmd[i] != '|')
+			next_can_pipe = 1;
+		else if (cmd[i] == '|' && next_can_pipe == 0)
+			*error = 1;
+		else if (cmd[i] == '|')
+			next_can_pipe = 0;
 		i++;
 	}
-	pipe_split = ft_split(cmd, '|');
+	if (next_can_pipe == 0)
+		*error = 1;
+}
+
+void	error_quote_pipe(char *cmd, int *error)
+{
+	int	i;
+	int	next_not_pipe;
+
 	i = 0;
-	while (pipe_split[i])
+	next_not_pipe = 0;
+	while (cmd[i] && *error == 0)
 	{
-		if (is_whitespace(pipe_split[i]))
-			print_stderr_no_exit("white space between |", FAIL);
+		while (cmd[i] && (cmd[i] == ' ' || (9 <= cmd[i] && cmd[i] <= 13)))
+			i++;
+		if (ft_strncmp(&cmd[i], "<<", 2) == 0 || \
+		ft_strncmp(&cmd[i], ">>", 2) == 0)
+		{
+			next_not_pipe = 1;
+			i++;
+		}
+		else if (cmd[i] == '<' || cmd[i] == '>')
+			next_not_pipe = 1;
+		else if (cmd[i] == '|' && next_not_pipe)
+			*error = 1;
+		else
+			next_not_pipe = 0;
 		i++;
 	}
-	free_split(&pipe_split);
+	if (*error == 1)
+		print_stderr_no_exit("syntax error near unexpected token `|'", FAIL);
 }
 
 int	error_symbol(char *command)

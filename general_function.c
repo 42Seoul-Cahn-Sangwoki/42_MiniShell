@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_function.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:00:34 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 17:00:43 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/23 13:35:41 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	print_stderr_no_exit(char *command, int code)
 {
 	g_global_var.exit = code % 256;
-	printf("minishell: %s: %s\n", command, strerror(g_global_var.exit));
+	strerror(g_global_var.exit);
+	printf("minishell: %s\n", command);
 }
 
 void	print_stderr(char *error_print)
