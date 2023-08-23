@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:34:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 20:07:40 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:53:03 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // 1. split by quote: cmd[next_quote]=' '-> split
 // 2. change each group considering $ and quote rule.
 // 3. merge group
-void	handle_quote(char **cmd)
+void	handle_quote(char **cmd, int is_change)
 {
 	char	**divided;
 	char	*ex_quote;
@@ -25,8 +25,8 @@ void	handle_quote(char **cmd)
 
 	if (cmd == 0)
 		return ;
-	i = 0;
-	while (cmd[i])
+	i = -1;
+	while (cmd[++i])
 	{
 		j = 0;
 		divided = divided_quote(cmd[i]);
@@ -34,12 +34,13 @@ void	handle_quote(char **cmd)
 		{
 			quote = divided[j][0];
 			ex_quote = exclude_quote(divided[j], quote);
-			divided[j] = change_commed(ex_quote, quote);
+			if (is_change)
+				ex_quote = change_commed(ex_quote, quote);
+			divided[j] = ex_quote;
 			j++;
 		}
 		free(cmd[i]);
 		cmd[i] = ft_merge(divided);
-		i++;
 	}
 }
 

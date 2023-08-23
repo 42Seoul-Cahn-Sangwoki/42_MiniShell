@@ -6,7 +6,7 @@
 #    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 14:40:18 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/22 16:29:27 by sangwoki         ###   ########.fr        #
+#    Updated: 2023/08/23 19:13:00 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c \
 		./execute/heredoc.c \
 		./execute/parent_processing.c \
 		./execute/token_processing.c \
+		./parsing/ft_split_pipe.c \
 
 OBJS = $(SRCS:.c=.o)
 INCS = ./interface.h \

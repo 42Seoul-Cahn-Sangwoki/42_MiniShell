@@ -15,7 +15,8 @@
 void	print_stderr_no_exit(char *command, int code)
 {
 	g_global_var.exit = code % 256;
-	printf("minishell: %s: %s\n", command, (char *)strerror(g_global_var.exit));
+	strerror(g_global_var.exit);
+	printf("minishell: %s\n", command);
 }
 
 void	print_stderr(char *error_print)

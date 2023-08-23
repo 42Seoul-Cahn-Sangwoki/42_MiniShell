@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:31:13 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 20:09:56 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:55:48 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,24 @@ int			pipex_count(char *line);
 t_node		*init_token(int pipex_counter);
 
 // tokenizer.c
-t_node		*token2corpus(int pipex_counter, char *line, int *error);
+t_node		*token2corpus(int *pipex_counter, char *line, int *error);
 t_node		*command_line(char *line, int *length);
 void		normalize_file(char **cmd);
-int			is_file(char *cmd);
+int			is_file(char *cmd, int is_token);
 int			tokenizer(t_node *token, char *command);
 
 // parsing_error.c
 int			error_handling(char **corpus);
 int			error_symbol(char *command);
-void		error_pipe(char *cmd);
+void		error_pipe(char *cmd, int *error);
+void		error_quote_pipe(char *cmd, int *error);
+
 // utitlity.c
 int			normalize_redirect(char *dup, char *command, int *is_mode);
 void		ft_push_back(t_file_info **head, t_file_info **node);
 t_file_info	*get_info(char *file_name, int write_mode);
 char		*change_commend_utility(char *cmd, char value, int i, int s_idx);
+char		*file_name_quote(char *file_name);
 
 // extract_feature.c
 char		**extract_command(char **command, int length);
@@ -54,7 +57,7 @@ char		*find_env(char *name);
 char		*extract_name(char *line, int *e_idx);
 
 // handler_symbol.c
-void		handle_quote(char **cmd);
+void		handle_quote(char **cmd, int is_change);
 int			find_next_quote(char *cmd, char quote, int i);
 char		*split_by_normal(char *cmd, int s_idx, int e_idx);
 char		**divided_quote(char *cmd);
@@ -78,4 +81,10 @@ void		token_free(t_node ***token);
 void		init_env(int argc, char *argv[], char *envp[]);
 void		valid_command_line(char *line);
 void		execute_shell(char ***command);
+
+// ft_split_pipe.c
+char		**ft_split_pipe(char *s, int *size);
+int			mk_tree_pipe(char *str, int size, char **branch);
+int			mk_branch_pipe(char *str);
+int			exclude_pipe(char *str, int s_idx);
 #endif

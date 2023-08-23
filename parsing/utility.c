@@ -6,22 +6,39 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:54:17 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 17:51:19 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:36:50 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing.h"
 
+// ft_split_group -> first quote delete
+char	*file_name_quote(char *file_name)
+{
+	char	**tmp;
+	char	*name;
+
+	tmp = ft_split_group(file_name, TRUE, TRUE);
+	handle_quote(tmp, FALSE);
+	name = ft_strdup(tmp[0]);
+	free_split(&tmp);
+	return (name);
+}
+
 t_file_info	*get_info(char *file_name, int write_mode)
 {
 	t_file_info	*info;
 
-	if (file_name[0] == 0 || file_name == 0 || file_name[0] == '$')
+	if (file_name == 0 || file_name[0] == 0)
+	{
+		print_stderr_no_exit("syntax error near unexpected token `newline'", \
+		FAIL);
 		return (0);
+	}
 	info = (t_file_info *)malloc(sizeof(t_file_info));
 	if (info == 0)
 		print_stderr("MALLOC");
-	info->file_name = ft_strdup(file_name);
+	info->file_name = file_name_quote(file_name);
 	info->write_mode = write_mode;
 	info->next = 0;
 	return (info);
