@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 14:21:18 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/23 19:50:35 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	error_quote_pipe(char *cmd, int *error)
 	{
 		while (cmd[i] && (cmd[i] == ' ' || (9 <= cmd[i] && cmd[i] <= 13)))
 			i++;
+		if (cmd[i] == 0)
+			break ;
 		if (ft_strncmp(&cmd[i], "<<", 2) == 0 || \
 		ft_strncmp(&cmd[i], ">>", 2) == 0)
 		{
@@ -62,8 +64,6 @@ void	error_quote_pipe(char *cmd, int *error)
 			next_not_pipe = 0;
 		i++;
 	}
-	if (*error == 1)
-		print_stderr_no_exit("syntax error near unexpected token `|'", FAIL);
 }
 
 int	error_symbol(char *command)
