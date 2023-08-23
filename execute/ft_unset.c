@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:58:21 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/17 13:32:58 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/21 19:57:01 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,19 @@ static int valid_string(char *str)
     return (1);
 }
 
-void    ft_unset(char **parameter)
+int ft_unset(char **parameter)
 {
     int         i;
     t_env_node  *find;
 
     if (!parameter[1])
-        return ;
+        return (set_exit_status(0, NULL, NULL));
     i = 1;
     while (parameter[i])
     {
         if (!(ft_isalpha(parameter[i][0]) || parameter[i][0] == '_') || !valid_string(parameter[i])) // 인자형식
-            printf("%s : not a valid identifier\n", parameter[i]);
+            return (set_exit_status(1, ft_strjoin("unset", parameter[i]), "not a valid identifier"));
+        
         else
         {
             find = search_node_by_key(g_global_var.envp_head, parameter[i]);
@@ -47,4 +48,5 @@ void    ft_unset(char **parameter)
         }
         ++i;
     }
+    return (set_exit_status(0, NULL, NULL));
 }
