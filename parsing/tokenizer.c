@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:39:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 19:57:48 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:45:22 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ t_node	*command_line(char *line, int *length)
 	error_quote_pipe(line, &error);
 	if (error)
 	{
-		print_stderr_no_exit("syntax error near unexpected token `|'", FAIL);
+		if (error == TRUE)
+			print_stderr_no_exit("syntax error near unexpected token `|'", \
+			FAIL);
 		return (FALSE);
 	}
 	(*length) = 0;

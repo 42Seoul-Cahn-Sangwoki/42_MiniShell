@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:31:13 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 18:55:48 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:42:47 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			error_handling(char **corpus);
 int			error_symbol(char *command);
 void		error_pipe(char *cmd, int *error);
 void		error_quote_pipe(char *cmd, int *error);
+int			exclude_whitespace_quote(char *cmd, int s_idx, int *error);
 
 // utitlity.c
 int			normalize_redirect(char *dup, char *command, int *is_mode);
