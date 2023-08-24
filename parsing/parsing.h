@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:31:13 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/24 17:32:50 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:42:26 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char		*ft_merge(char **divided);
 
 // ft_split_group.c
 int			exclude_whitespace(char *str, int is_whitespace, int s_idx);
-size_t		mk_branch_group(char *str, int is_white, int is_quote);
+size_t		mk_branch_group(char *str, int is_white);
 char		*mk_leaf_group(char *str, size_t len);
 size_t		mk_tree_group(char *str, int flag, size_t size, char **branch);
 char		**ft_split_group(char *s, int is_whitespace, int is_quote);
@@ -77,6 +77,7 @@ char		**ft_split_group(char *s, int is_whitespace, int is_quote);
 // token_free.c
 void		file_info_free(t_file_info **head);
 void		token_free(t_node ***token);
+int         exclue_redirect(char *str, int i);
 
 // main_utility.c
 void		init_env(int argc, char *argv[], char *envp[]);

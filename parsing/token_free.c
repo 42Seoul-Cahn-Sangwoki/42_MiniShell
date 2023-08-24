@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 23:37:17 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/15 15:24:26 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:53:26 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,15 @@ void	token_free(t_node ***token)
 		i++;
 	}
 	free((*token));
+}
+
+int	exclue_redirect(char *str, int i)
+{
+	if (str[i] == 0)
+		return (i);
+	if (ft_strncmp(&str[i], "<<", 2) == 0 || ft_strncmp(&str[i], ">>", 2) == 0)
+		i = i + 2;
+	else if (str[i] == '<' || str[i] == '>')
+		i++;
+	return (i);
 }
