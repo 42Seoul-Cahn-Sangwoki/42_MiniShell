@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utility.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 20:46:30 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/24 13:56:38 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	free_token(t_node *token, int length)
 	i = 0;
 	while (i < length)
 	{
-		free_split(&token[i].commands);
+		if (token[i].commands != 0)
+			free_split(&token[i].commands);
 		free_file_node(&token[i].infile_head);
 		free_file_node(&token[i].outfile_head);
 		++i;
@@ -93,11 +94,36 @@ void	valid_command_line(char *line)
 
 	token = command_line(line, &length);
 	if (token == 0)
-	{
-		print_stderr_no_exit("missing: format", FAIL);
 		return ;
-	}
 	execute_signal();
 	execute(token, length);
 	free_token(token, length);
 }
+
+// int	i;
+// int	j;
+
+// j = 0;
+// printf("length: %d\n", length);
+// while (j < length)
+// {
+// 	i = 0;
+// 	while (token[j].commands && token[j].commands[i])
+// 	{
+// 		printf("%d commands: %s\n", j, token[j].commands[i]);
+// 		i++;
+// 	}
+// 	j++;
+// }
+// t_file_info *head = token[0].infile_head;
+// while (head != 0)
+// {
+// 	printf("%s => %d\n", head->file_name, head->write_mode);
+// 	head = head->next;
+// }
+// head = token[0].outfile_head;
+// while (head != 0)
+// {
+// 	printf("%s => %d\n", head->file_name, head->write_mode);
+// 	head = head->next;
+// }

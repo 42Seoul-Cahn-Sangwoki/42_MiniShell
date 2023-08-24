@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:42:52 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 14:53:57 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/24 18:19:44 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	update_pwd(void)
 		return (set_exit_status(1, ft_strdup("cd"), "no $OLDPWD"));
 	modify_env_value(old_pwd, pwd->value);
 	modify_env_value(pwd, cur_path);
+	free(cur_path);
 	return (0);
 }
 

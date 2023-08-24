@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:45:14 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/23 14:49:20 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/24 21:26:25 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ typedef struct s_process_manage
 }	t_process_manage;
 
 int		check_and_create_file_by_write(char *file_name);
-int		return_input_fd(t_file_info *head);
-int		return_output_fd(t_file_info *head);
+int		return_input_fd(t_file_info *head, int one);
+int		return_output_fd(t_file_info *head, int one);
 void	token_processing(t_node *token, int **pipe, int index, int length);
 void	parent_processing(t_process_manage *pm, t_node *head, int length);
 void	allocate_process_manage(t_process_manage *pm, int length);
-char	*return_tmpfile_name_by_here_document(char *end_string);
+void	change_tmpfile_name_by_here_document(char *end_string, char *tmp_file);
 char	*ft_ultoa(unsigned long long n);
 char	*find_path(void);
 int		find_execute_file(char **commands, char *path);
 char	*make_no_overlap_tmpfile(void);
-void	create_heredoc_file(t_node *cmds, int length);
+int		create_heredoc_file(t_node *cmds, int length);
 void	delete_tmp_file(t_node *cmds, int length);
 int		is_valid_execute_file(char	*commands, char *path);
 int		update_pwd(void);

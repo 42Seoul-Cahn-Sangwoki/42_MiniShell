@@ -6,12 +6,12 @@
 #    By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/24 16:38:48 by cahn             ###   ########.fr        #
+#    Updated: 2023/08/24 17:51:57 by cahn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g3 -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra
 LINKING_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
 COMPILE_FLAGS = -I${HOME}/.brew/opt/readline/include
 NAME = minishell

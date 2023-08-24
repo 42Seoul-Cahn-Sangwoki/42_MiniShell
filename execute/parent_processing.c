@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/23 14:35:37 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/24 21:26:07 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	delete_tmp_file(t_node *cmds, int length)
 		while (find != NULL)
 		{
 			if (find->write_mode == HERE_DOC)
-				if (unlink(find->file_name))
+				if (!access(find->file_name, F_OK) && unlink(find->file_name))
 					print_stderr(find->file_name);
 			find = find->next;
 		}
@@ -70,6 +70,26 @@ void	close_all_pipe(int **pipe_array, int length)
 	}
 }
 
+void	wait_all_pid(t_process_manage *pm, t_node *cmds, int length)
+{
+	int	i;
+	int	stat;
+
+	i = 0;
+	while (i < length)
+	{
+		if (cmds[i].commands[0] != NULL && \
+			!ft_strncmp(cmds[i].commands[0], "./minishell", 11))
+		{
+			signal(SIGINT, SIG_IGN);
+			signal(SIGQUIT, SIG_IGN);
+		}
+		waitpid(pm->child_pid_array[i++], &stat, 0);
+	}
+	set_exit_status(stat >> 8, NULL, NULL);
+	free(pm->child_pid_array);
+}
+
 void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 {
 	int	i;
@@ -84,17 +104,6 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 	}
 	free(pm->pipe_array);
 	execute_parent_signal();
-	i = 0;
-	while (i < length)
-	{
-		if (cmds[i].commands[0] != NULL && \
-			!ft_strncmp(cmds[i].commands[0], "./minishell", 11))
-		{
-			signal(SIGINT, SIG_IGN);
-			signal(SIGQUIT, SIG_IGN);
-		}
-		waitpid(pm->child_pid_array[i++], NULL, 0);
-	}
-	free(pm->child_pid_array);
+	wait_all_pid(pm, cmds, length);
 	delete_tmp_file(cmds, length);
 }

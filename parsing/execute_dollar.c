@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_dollar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:48:03 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 18:53:33 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:02:38 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*extract_name(char *line, int *e_idx)
 	while (res[i] && res[i] != '$' && res[i] != '\'' && res[i] != '\"')
 	{
 		if (res[i] == ' ' || (9 <= res[i] && res[i] <= 13))
+			break ;
+		if (res[i] == '/')
 			break ;
 		i++;
 	}
