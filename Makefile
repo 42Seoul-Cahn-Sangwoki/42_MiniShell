@@ -6,7 +6,7 @@
 #    By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/22 19:20:13 by cahn             ###   ########.fr        #
+#    Updated: 2023/08/24 16:38:48 by cahn             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c \
 		./parsing/tokenizer.c \
 		./parsing/utility.c \
 		./parsing/ft_split_group.c \
+		./parsing/ft_split_pipe.c \
 		./parsing/handle_symbol.c \
 		./parsing/execute_dollar.c \
 		./parsing/token_free.c \
