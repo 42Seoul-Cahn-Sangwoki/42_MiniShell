@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:26:47 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/21 20:14:51 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/24 21:54:25 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	one_built_in_processing(t_node *cmds)
 	execute_built_in(cmds[0].commands[0], cmds[0].commands);
 	delete_tmp_file(cmds, 1);
 }
-
 
 void    execute(t_node *cmds, int length)
 {

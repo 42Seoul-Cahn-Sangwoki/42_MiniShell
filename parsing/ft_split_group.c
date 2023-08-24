@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:54:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 18:55:50 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:05:57 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	exclude_whitespace(char *str, int is_whitespace, int s_idx)
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 			break ;
+		if (str[i] == '<' || str[i] == '>')
+			return (i);
 		i++;
 	}
 	while (str[i] && (str[i] == '\'' || str[i] == '\"'))

@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/24 16:40:22 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:19:54 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char *argv[], char *envp[])
 			add_history(&line[0]);
 		if (line[0] != 0 && !is_whitespace(line))
 			valid_command_line(line);
+		system("leaks minishell");
 		free(line);
 	}
 	return (0);
