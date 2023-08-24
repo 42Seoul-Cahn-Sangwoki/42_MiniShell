@@ -6,12 +6,12 @@
 #    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/22 21:59:34 by sangwoki         ###   ########.fr        #
+#    Updated: 2023/08/24 22:14:09 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g3 -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra
 LINKING_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
 COMPILE_FLAGS = -I${HOME}/.brew/opt/readline/include
 NAME = minishell
@@ -28,6 +28,7 @@ SRCS = 	./main.c ./general_function.c ./main_utility.c \
 		./parsing/tokenizer.c \
 		./parsing/utility.c \
 		./parsing/ft_split_group.c \
+		./parsing/ft_split_pipe.c \
 		./parsing/handle_symbol.c \
 		./parsing/execute_dollar.c \
 		./parsing/token_free.c \

@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:48:03 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 22:47:10 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:15:09 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	*extract_name(char *line, int *e_idx)
 	{
 		if (res[i] == ' ' || (9 <= res[i] && res[i] <= 13))
 			break ;
+		if (res[i] == '/')
+			break ;
 		i++;
 	}
 	res[i] = 0;
@@ -59,7 +61,10 @@ int	find_next_quote(char *cmd, char quote, int i)
 	while (cmd[i] && cmd[i] != quote)
 		i++;
 	if (cmd[i] == 0)
-		print_stderr("quote is unbalance");
+	{
+		print_stderr_no_exit("quote is unbalance", FAIL);
+		return (-100);
+	}
 	return (i);
 }
 

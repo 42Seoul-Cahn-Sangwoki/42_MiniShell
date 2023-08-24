@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 14:37:03 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:12:49 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,19 @@ void	valid_command_line(char *line)
 }
 
 // int	i;
+// int	j;
 
-// i = 0;
-// while (token[0].commands && token[0].commands[i])
+// j = 0;
+// printf("length: %d\n", length);
+// while (j < length)
 // {
-// 	printf("commands: %s\n", token[i].commands[i]);
-// 	i++;
+// 	i = 0;
+// 	while (token[j].commands && token[j].commands[i])
+// 	{
+// 		printf("%d commands: %s\n", j, token[j].commands[i]);
+// 		i++;
+// 	}
+// 	j++;
 // }
 // t_file_info *head = token[0].infile_head;
 // while (head != 0)

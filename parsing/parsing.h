@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:31:13 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 14:32:22 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:12:26 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			pipex_count(char *line);
 t_node		*init_token(int pipex_counter);
 
 // tokenizer.c
-t_node		*token2corpus(int pipex_counter, char *line, int *error);
+t_node		*token2corpus(int *pipex_counter, char *line, int *error);
 t_node		*command_line(char *line, int *length);
 void		normalize_file(char **cmd);
 int			is_file(char *cmd, int is_token);
@@ -38,13 +38,14 @@ int			error_handling(char **corpus);
 int			error_symbol(char *command);
 void		error_pipe(char *cmd, int *error);
 void		error_quote_pipe(char *cmd, int *error);
+int			exclude_whitespace_quote(char *cmd, int s_idx, int *error);
 
 // utitlity.c
 int			normalize_redirect(char *dup, char *command, int *is_mode);
 void		ft_push_back(t_file_info **head, t_file_info **node);
 t_file_info	*get_info(char *file_name, int write_mode);
 char		*change_commend_utility(char *cmd, char value, int i, int s_idx);
-char		*file_name_quote(char *file_name);
+char		*file_name_quote(char *file_name, int *error);
 
 // extract_feature.c
 char		**extract_command(char **command, int length);
@@ -81,4 +82,10 @@ void		token_free(t_node ***token);
 void		init_env(int argc, char *argv[], char *envp[]);
 void		valid_command_line(char *line);
 void		execute_shell(char ***command);
+
+// ft_split_pipe.c
+char		**ft_split_pipe(char *s, int *size);
+int			mk_tree_pipe(char *str, int size, char **branch);
+int			mk_branch_pipe(char *str);
+int			exclude_pipe(char *str, int s_idx);
 #endif

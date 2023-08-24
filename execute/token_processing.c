@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/23 14:50:11 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/24 18:13:01 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,59 @@ int	check_and_create_file_by_write(char *file_name)
 	return (RETURN_NORMAL);
 }
 
-int	return_input_fd(t_file_info *head)
+int	return_input_fd(t_file_info *head, int one)
 {
 	if (head == NULL)
 		return (-1);
 	while (head->next != NULL)
 	{
 		if (head->write_mode == READ && access(head->file_name, R_OK))
-			print_stderr(head->file_name);
+		{
+			if (!one)
+				print_stderr(head->file_name);
+			else
+				print_stderr_no_exit("No such file or directory", 1);
+			return (-2);
+		}
 		head = head->next;
 	}
 	if (head->write_mode == HERE_DOC)
 		return (open(head->file_name, O_RDONLY));
 	if (head->write_mode == READ && access(head->file_name, R_OK))
-		print_stderr(head->file_name);
+	{
+		if (!one)
+			print_stderr(head->file_name);
+		else
+			print_stderr_no_exit("No such file or directory", 1);
+		return (-2);
+	}
 	return (open(head->file_name, O_RDONLY));
 }
 
-int	return_output_fd(t_file_info *head)
+int	return_output_fd(t_file_info *head, int one)
 {
 	if (head == NULL)
 		return (-1);
 	while (head->next != NULL)
 	{
 		if (check_and_create_file_by_write(head->file_name))
-			print_stderr(head->file_name);
+		{
+			if (!one)
+				print_stderr(head->file_name);
+			else
+				print_stderr_no_exit("No such file or directory", 1);
+			return (-2);
+		}
 		head = head->next;
 	}
 	if (check_and_create_file_by_write(head->file_name))
-		print_stderr(head->file_name);
+	{
+		if (!one)
+			print_stderr(head->file_name);
+		else
+			print_stderr_no_exit("No such file or directory", 1);
+		return (-2);
+	}
 	if (head->write_mode == WRITE_NEW)
 		return (open(head->file_name, O_WRONLY | O_CREAT | O_TRUNC, 00777));
 	return (open(head->file_name, O_WRONLY | O_CREAT | O_APPEND, 00777));
@@ -70,8 +94,8 @@ void	pipe_processing(t_node *token, int **pipe, int index, int length)
 	int		input_fd;
 	int		output_fd;
 
-	input_fd = return_input_fd(token->infile_head);
-	output_fd = return_output_fd(token->outfile_head);
+	input_fd = return_input_fd(token->infile_head, 0);
+	output_fd = return_output_fd(token->outfile_head, 0);
 	if (input_fd != -1)
 	{
 		dup2(input_fd, 0);

@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:39:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 19:50:41 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:13:27 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,23 @@ int	tokenizer(t_node *token, char *command)
 	return (error);
 }
 
-t_node	*token2corpus(int pipex_counter, char *line, int *error)
+t_node	*token2corpus(int *pipex_counter, char *line, int *error)
 {
 	char	**corpus;
 	int		i;
 	t_node	*token;
 
-	corpus = ft_split(line, '|');
-	if (error_handling(corpus) == TRUE)
+	corpus = ft_split_pipe(line, pipex_counter);
+	if (corpus == 0)
 		return (FALSE);
-	token = init_token(pipex_counter);
+	if (error_handling(corpus) == TRUE)
+	{
+		free_split(&corpus);
+		return (FALSE);
+	}
+	token = init_token(*pipex_counter);
 	i = 0;
-	while (i < pipex_counter + 1)
+	while (i < *pipex_counter)
 	{
 		if (tokenizer(token + i, corpus[i]) == 1)
 			*error = 1;
@@ -98,7 +103,6 @@ t_node	*token2corpus(int pipex_counter, char *line, int *error)
 t_node	*command_line(char *line, int *length)
 {
 	t_node	*token;
-	int		pipex_counter;
 	int		error;
 
 	error = 0;
@@ -106,12 +110,13 @@ t_node	*command_line(char *line, int *length)
 	error_quote_pipe(line, &error);
 	if (error)
 	{
-		print_stderr_no_exit("syntax error near unexpected token `|'", FAIL);
+		if (error == TRUE)
+			print_stderr_no_exit("syntax error near unexpected token `|'", \
+			FAIL);
 		return (FALSE);
 	}
-	pipex_counter = pipex_count(line);
-	*length = pipex_counter + 1;
-	token = token2corpus(pipex_counter, line, &error);
+	(*length) = 0;
+	token = token2corpus(length, line, &error);
 	if (error)
 	{
 		free_token(token, *length);

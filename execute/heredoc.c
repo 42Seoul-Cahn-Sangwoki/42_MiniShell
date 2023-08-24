@@ -6,18 +6,42 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:41:22 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 15:19:26 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/24 21:22:52 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../interface.h"
 #include "execute.h"
+#include "../signal/signal.h"
 
-void	create_heredoc_file(t_node *cmds, int length)
+static void	process_manage_for_heredoc(t_file_info *find)
+{
+	char	*end;
+	int		pid;
+	int		stat;
+	char	*tmpfile;
+
+	signal(SIGINT, SIG_IGN);
+	tmpfile = make_no_overlap_tmpfile();
+	end = find->file_name;
+	find->file_name = tmpfile;
+	pid = fork();
+	if (!pid)
+	{
+		execute_signal();
+		change_tmpfile_name_by_here_document(end, tmpfile);
+		exit(0);
+	}
+	waitpid(pid, &stat, 0);
+	set_exit_status(stat >> 8, NULL, NULL);
+	free(end);
+	execute_signal();
+}
+
+int	create_heredoc_file(t_node *cmds, int length)
 {
 	int			i;
 	t_file_info	*find;
-	char		*tmpfile;
 
 	i = 0;
 	while (i < length)
@@ -27,14 +51,19 @@ void	create_heredoc_file(t_node *cmds, int length)
 		{
 			if (find->write_mode == HERE_DOC)
 			{
-				tmpfile = return_tmpfile_name_by_here_document(find->file_name);
-				free(find->file_name);
-				find->file_name = tmpfile;
+				process_manage_for_heredoc(find);
+				if (g_global_var.exit)
+				{
+					printf(">\n");
+					delete_tmp_file(cmds, length);
+					return (g_global_var.exit);
+				}
 			}
 			find = find->next;
 		}
 		++i;
 	}
+	return (g_global_var.exit);
 }
 
 char	*make_no_overlap_tmpfile(void)
@@ -80,17 +109,14 @@ static void	input_to_file_to_end_string(char *end_string, int tmp_fd)
 	}
 }
 
-char	*return_tmpfile_name_by_here_document(char *end_string)
+void	change_tmpfile_name_by_here_document(char *end_string, char *tmp_file)
 {
 	int		tmp_fd;
-	char	*tmp_file;
 
-	tmp_file = make_no_overlap_tmpfile();
 	tmp_fd = open(tmp_file, O_WRONLY | O_CREAT | O_TRUNC, 00777);
 	if (tmp_fd < 0)
 		print_stderr(tmp_file);
 	input_to_file_to_end_string(end_string, tmp_fd);
 	if (close(tmp_fd) < 0)
 		print_stderr("tmp_fd");
-	return (tmp_file);
 }

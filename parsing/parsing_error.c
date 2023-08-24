@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 19:50:35 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:12:09 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,27 @@ void	error_pipe(char *cmd, int *error)
 		*error = 1;
 }
 
+int	exclude_whitespace_quote(char *cmd, int s_idx, int *error)
+{
+	int	i;
+
+	i = s_idx;
+	while (cmd[i] && (cmd[i] == ' ' || (9 <= cmd[i] && cmd[i] <= 13)))
+			i++;
+	while (cmd[i] && (cmd[i] == '\'' || cmd[i] == '\"'))
+	{
+		i = find_next_quote(cmd, cmd[i], i + 1) + 1;
+		if (i < 0)
+		{
+			*error = 2;
+			return (i);
+		}
+	}
+	if (i == s_idx)
+		return (i);
+	return (exclude_whitespace_quote(cmd, i, error));
+}
+
 void	error_quote_pipe(char *cmd, int *error)
 {
 	int	i;
@@ -46,9 +67,8 @@ void	error_quote_pipe(char *cmd, int *error)
 	next_not_pipe = 0;
 	while (cmd[i] && *error == 0)
 	{
-		while (cmd[i] && (cmd[i] == ' ' || (9 <= cmd[i] && cmd[i] <= 13)))
-			i++;
-		if (cmd[i] == 0)
+		i = exclude_whitespace_quote(cmd, i, error);
+		if (*error || cmd[i] == 0)
 			break ;
 		if (ft_strncmp(&cmd[i], "<<", 2) == 0 || \
 		ft_strncmp(&cmd[i], ">>", 2) == 0)
@@ -73,6 +93,10 @@ int	error_symbol(char *command)
 	i = 0;
 	while (command[i])
 	{
+		while (command[i] && (command[i] == '\'' || command[i] == '\"'))
+			i = find_next_quote(command, command[i], i + 1) + 1;
+		if (command[i] == 0)
+			break ;
 		if (command[i] == ';' || command[i] == '\\')
 			break ;
 		if (ft_strncmp(&command[i], "$$", 2) == 0)

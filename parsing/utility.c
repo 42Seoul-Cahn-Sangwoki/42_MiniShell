@@ -6,21 +6,36 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:54:17 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 13:36:50 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:13:44 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing.h"
 
 // ft_split_group -> first quote delete
-char	*file_name_quote(char *file_name)
+char	*file_name_quote(char *file_name, int *error)
 {
 	char	**tmp;
 	char	*name;
+	char	*env_var;
 
 	tmp = ft_split_group(file_name, TRUE, TRUE);
 	handle_quote(tmp, FALSE);
 	name = ft_strdup(tmp[0]);
+	if (name[0] == '$')
+	{
+		env_var = find_env(ft_strdup(&name[1]));
+		if (env_var[0] == 0)
+		{
+			*error = 1;
+			free(env_var);
+		}
+		else
+		{
+			free(name);
+			name = env_var;
+		}
+	}
 	free_split(&tmp);
 	return (name);
 }
@@ -28,6 +43,7 @@ char	*file_name_quote(char *file_name)
 t_file_info	*get_info(char *file_name, int write_mode)
 {
 	t_file_info	*info;
+	int			error;
 
 	if (file_name == 0 || file_name[0] == 0)
 	{
@@ -38,9 +54,18 @@ t_file_info	*get_info(char *file_name, int write_mode)
 	info = (t_file_info *)malloc(sizeof(t_file_info));
 	if (info == 0)
 		print_stderr("MALLOC");
-	info->file_name = file_name_quote(file_name);
+	error = 0;
+	info->file_name = file_name_quote(file_name, &error);
 	info->write_mode = write_mode;
 	info->next = 0;
+	if (error == 1)
+	{
+		print_stderr_no_exit("ambiguous redirect", \
+		FAIL);
+		free(info->file_name);
+		free(info);
+		return (0);
+	}
 	return (info);
 }
 

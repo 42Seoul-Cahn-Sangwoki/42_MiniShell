@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:39:58 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 13:33:41 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:10:39 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char	*allocate_tmp(int length)
 	tmp[0] = 0;
 	return (tmp);
 }
-
 
 t_file_info	*extract_infile(char **command, int *error)
 {

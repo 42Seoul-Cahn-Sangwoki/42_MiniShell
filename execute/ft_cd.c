@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:19:11 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 15:29:25 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/24 19:19:31 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	ft_cd_no_parameter(char **parameter)
 			"No such file or directory"));
 	}
 	update_pwd();
+	free(complete);
 	return (set_exit_status(0, NULL, NULL));
 }
 
@@ -92,8 +93,12 @@ int	ft_cd(char **parameter)
 	find_final_path(split, &complete);
 	free_split(&split);
 	if (chdir(complete))
+	{
+		free(complete);
 		return (set_exit_status(1, ft_strjoin("cd: ", parameter[1]), \
 			"No such file or directory"));
+	}
 	update_pwd();
+	free(complete);
 	return (set_exit_status(0, NULL, NULL));
 }
