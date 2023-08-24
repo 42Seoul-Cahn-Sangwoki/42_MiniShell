@@ -6,33 +6,84 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 21:01:14 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/17 17:41:57 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:50:38 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	error_pipe(char *cmd)
+void	error_pipe(char *cmd, int *error)
 {
-	char	**pipe_split;
-	int		i;
+	int	i;
+	int	next_can_pipe;
 
 	i = 0;
-	while (cmd[i])
+	next_can_pipe = 0;
+	while (cmd[i] && *error == 0)
 	{
-		if (ft_strncmp(&cmd[i], "||", 2) == 0)
-			print_stderr_no_exit("| is consequtive", FAIL);
+		while (cmd[i] && (cmd[i] == ' ' || (9 <= cmd[i] && cmd[i] <= 13)))
+			i++;
+		if (cmd[i] == 0)
+			break ;
+		if (cmd[i] != '|')
+			next_can_pipe = 1;
+		else if (cmd[i] == '|' && next_can_pipe == 0)
+			*error = 1;
+		else if (cmd[i] == '|')
+			next_can_pipe = 0;
 		i++;
 	}
-	pipe_split = ft_split(cmd, '|');
+	if (next_can_pipe == 0)
+		*error = 1;
+}
+
+int	exclude_whitespace_quote(char *cmd, int s_idx, int *error)
+{
+	int	i;
+
+	i = s_idx;
+	while (cmd[i] && (cmd[i] == ' ' || (9 <= cmd[i] && cmd[i] <= 13)))
+			i++;
+	while (cmd[i] && (cmd[i] == '\'' || cmd[i] == '\"'))
+	{
+		i = find_next_quote(cmd, cmd[i], i + 1) + 1;
+		if (i < 0)
+		{
+			*error = 2;
+			return (i);
+		}
+	}
+	if (i == s_idx)
+		return (i);
+	return (exclude_whitespace_quote(cmd, i, error));
+}
+
+void	error_quote_pipe(char *cmd, int *error)
+{
+	int	i;
+	int	next_not_pipe;
+
 	i = 0;
-	while (pipe_split[i])
+	next_not_pipe = 0;
+	while (cmd[i] && *error == 0)
 	{
-		if (is_whitespace(pipe_split[i]))
-			print_stderr_no_exit("white space between |", FAIL);
+		i = exclude_whitespace_quote(cmd, i, error);
+		if (*error || cmd[i] == 0)
+			break ;
+		if (ft_strncmp(&cmd[i], "<<", 2) == 0 || \
+		ft_strncmp(&cmd[i], ">>", 2) == 0)
+		{
+			next_not_pipe = 1;
+			i++;
+		}
+		else if (cmd[i] == '<' || cmd[i] == '>')
+			next_not_pipe = 1;
+		else if (cmd[i] == '|' && next_not_pipe)
+			*error = 1;
+		else
+			next_not_pipe = 0;
 		i++;
 	}
-	free_split(&pipe_split);
 }
 
 int	error_symbol(char *command)
@@ -42,6 +93,10 @@ int	error_symbol(char *command)
 	i = 0;
 	while (command[i])
 	{
+		while (command[i] && (command[i] == '\'' || command[i] == '\"'))
+			i = find_next_quote(command, command[i], i + 1) + 1;
+		if (command[i] == 0)
+			break ;
 		if (command[i] == ';' || command[i] == '\\')
 			break ;
 		if (ft_strncmp(&command[i], "$$", 2) == 0)
