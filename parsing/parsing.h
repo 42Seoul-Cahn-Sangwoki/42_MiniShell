@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:31:13 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/24 22:12:26 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:42:47 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			normalize_redirect(char *dup, char *command, int *is_mode);
 void		ft_push_back(t_file_info **head, t_file_info **node);
 t_file_info	*get_info(char *file_name, int write_mode);
 char		*change_commend_utility(char *cmd, char value, int i, int s_idx);
-char		*file_name_quote(char *file_name, int *error);
+char		*file_name_quote(char *file_name);
 
 // extract_feature.c
 char		**extract_command(char **command, int length);
