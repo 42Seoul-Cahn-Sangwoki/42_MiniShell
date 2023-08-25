@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:39:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/24 13:45:22 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:48:33 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	normalize_file(char **join_file)
 	}
 }
 
-// handle_quote
-// token->commands = extract_command(vector, ft_strlen(norm_command));
 int	tokenizer(t_node *token, char *command)
 {
 	char	**vector;

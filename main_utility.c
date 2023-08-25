@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utility.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:43:45 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/24 22:59:23 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:49:05 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,31 +99,3 @@ void	valid_command_line(char *line)
 	execute(token, length);
 	free_token(token, length);
 }
-
-// int	i;
-// int	j;
-
-// j = 0;
-// printf("length: %d\n", length);
-// while (j < length)
-// {
-// 	i = 0;
-// 	while (token[j].commands && token[j].commands[i])
-// 	{
-// 		printf("%d commands: %s\n", j, token[j].commands[i]);
-// 		i++;
-// 	}
-// 	j++;
-// }
-// t_file_info *head = token[0].infile_head;
-// while (head != 0)
-// {
-// 	printf("%s => %d\n", head->file_name, head->write_mode);
-// 	head = head->next;
-// }
-// head = token[0].outfile_head;
-// while (head != 0)
-// {
-// 	printf("%s => %d\n", head->file_name, head->write_mode);
-// 	head = head->next;
-// }

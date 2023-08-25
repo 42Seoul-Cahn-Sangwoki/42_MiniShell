@@ -6,17 +6,13 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:52:23 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/25 16:28:06 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 20:56:03 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing/parsing.h"
 #include"signal/signal.h"
 
-// when ctrl + D -> eof. print exit.
-// ========================================== //
-// valid_command_line has execute and parsing
-// ========================================== //
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;

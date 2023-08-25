@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/25 16:50:21 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 21:06:55 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ void	wait_all_pid(t_process_manage *pm, t_node *cmds, int length)
 	set_exit_status(stat, NULL, NULL);
 	free(pm->child_pid_array);
 }
-
-// exit code는 g_global_var.exit = (status >> 8)이고 signal은 (128 | status)임
 
 void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 {

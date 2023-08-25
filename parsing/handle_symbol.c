@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_symbol.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 19:34:26 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 12:53:03 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:47:55 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing.h"
 
-// 1. split by quote: cmd[next_quote]=' '-> split
-// 2. change each group considering $ and quote rule.
-// 3. merge group
 void	handle_quote(char **cmd, int is_change)
 {
 	char	**divided;
@@ -44,11 +41,6 @@ void	handle_quote(char **cmd, int is_change)
 	}
 }
 
-// 2. change each group considering $ and quote rule.
-// consequtive $ is error.
-// [open_quote, close_quote] => each quote delete first
-// 1) if double quote or noting: 
-// 2) if single quote: change
 char	*exclude_quote(char *cmd, char quote)
 {
 	char	*ex_quote;
@@ -61,7 +53,6 @@ char	*exclude_quote(char *cmd, char quote)
 	return (ex_quote);
 }
 
-// about command: gohome$HOME$USER, "  $HOME", " $", "    $?    "
 char	*change_commed(char *cmd, char value)
 {
 	char	*join_cmd;
@@ -90,7 +81,6 @@ char	*change_commed(char *cmd, char value)
 	return (join_cmd);
 }
 
-// 3. join with dollar
 char	*append_commend(char *cmd, char *tmp)
 {
 	char	*result;

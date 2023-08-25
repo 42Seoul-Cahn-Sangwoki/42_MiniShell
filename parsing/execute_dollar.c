@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_dollar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 11:48:03 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/24 17:24:47 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:47:16 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*find_env(char *name)
 	return (res);
 }
 
-// if i == 0 means "$"
 char	*extract_name(char *line, int *e_idx)
 {
 	int		i;
@@ -68,9 +67,6 @@ int	find_next_quote(char *cmd, char quote, int i)
 	return (i);
 }
 
-// 1. split: [s_idx, e_idx)
-// 1) split by normal: cmd[e_idx] = 0 -> ft_strdup -> resotre
-// 2) split by quote: cmd[next_quote] = 0 -> ft_strdup
 char	*split_by_normal(char *cmd, int s_idx, int e_idx)
 {
 	char	tmp;

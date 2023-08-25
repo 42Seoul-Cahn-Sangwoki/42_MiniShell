@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_group.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:54:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/24 22:55:51 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:47:31 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,24 +137,3 @@ char	**ft_split_group(char *s, int is_whitespace, int is_quote)
 	}
 	return (branch);
 }
-
-// #include<stdio.h>
-
-// int	main(void)
-// {
-// 	char	**p;
-// 	int		i;
-// 	char	*test;
-
-// 	test = "echo \"\'$?         $HOME$HOME$HOME$HOME$? $\'\"                go";
-// 	p = ft_split_group(test, TRUE, TRUE);
-// 	i = 0;
-// 	while (p[i])
-// 	{
-// 		printf("[%s]\n", p[i]);
-// 		i++;
-// 	}
-// 	if (p[i] == 0)
-// 		printf("good");
-// 	return (0);
-// }

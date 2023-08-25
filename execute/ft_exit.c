@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:57:58 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/24 23:23:38 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 21:03:46 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,15 @@ int	set_exit_status(int code, char *perror_cmd, char *error_message)
 	g_global_var.exit = code % 256;
 	if (perror_cmd != NULL)
 	{
-		printf("%s", perror_cmd);
+		write(2, perror_cmd, ft_strlen(perror_cmd));
+		write(2, " ", 1);
 		free(perror_cmd);
 	}
 	if (error_message != NULL)
-		printf(": %s\n", error_message);
+	{
+		write(2, error_message, ft_strlen(error_message));
+		write(2, "\n", 1);
+	}
 	return (g_global_var.exit);
 }
 

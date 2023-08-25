@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:54:17 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/24 18:21:06 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:48:39 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"parsing.h"
 
-// ft_split_group -> first quote delete
 char	*file_name_quote(char *file_name, int *error)
 {
 	char	**tmp;

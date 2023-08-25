@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:58:25 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 17:32:27 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 20:40:06 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	delete_node(t_env_node **head, t_env_node *node)
 		*head = node->next;
 	if (node->next != NULL)
 		node->next->prev = node->prev;
+	if (node->key)
+		free(node->key);
+	if (node->value)
+		free(node->value);
 	free(node);
 }
 

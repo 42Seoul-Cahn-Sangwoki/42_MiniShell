@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:51:16 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/22 17:34:17 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 20:44:32 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static int	parameter_check(char *para)
 
 	if (ft_isalpha(para[0]) || para[0] == '_')
 		return (1);
+	if (!para[0])
+		return (0);
 	i = 0;
 	while (para[i])
 	{
