@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:39:10 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/24 21:08:07 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 16:19:27 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	find_execute_file(char **commands, char *path)
 	char	*tmp;
 	char	*res;
 
+	if (!commands[0][0])
+		return (0);
 	split = ft_split(path, ':');
 	i = -1;
 	while (split[++i])
@@ -48,13 +50,15 @@ int	find_execute_file(char **commands, char *path)
 	return (0);
 }
 
-int	is_valid_execute_file(char	*commands, char *path)
+int	is_valid_execute_file(char *commands, char *path)
 {
 	char	**split;
 	int		i;
 	char	*tmp;
 	char	*res;
 
+	if (!commands[0])
+		return (0);
 	split = ft_split(path, ':');
 	i = -1;
 	while (split[++i])

@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:41:22 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/24 21:22:52 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 16:15:38 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ static void	process_manage_for_heredoc(t_file_info *find)
 		exit(0);
 	}
 	waitpid(pid, &stat, 0);
+	if (stat == 2 || stat == 3)
+		stat = (128 | stat);
+	else
+		stat = (stat >> 8);
 	set_exit_status(stat >> 8, NULL, NULL);
 	free(end);
 	execute_signal();
