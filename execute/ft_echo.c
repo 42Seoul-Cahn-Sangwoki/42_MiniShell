@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:17:59 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/23 14:34:22 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 19:16:46 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,20 @@ int	ft_echo(char **parameter)
 
 	i = 1;
 	opt = 0;
+	if (parameter[i])
+	{
+		if (is_option(parameter[i]))
+			opt = 1;
+		else
+			printf("%s", parameter[i]);
+		++i;
+	}
 	while (parameter[i])
 	{
 		if (is_option(parameter[i]))
 			opt = 1;
 		else
-			printf("%s ", parameter[i]);
+			printf(" %s", parameter[i]);
 		++i;
 	}
 	if (!opt)

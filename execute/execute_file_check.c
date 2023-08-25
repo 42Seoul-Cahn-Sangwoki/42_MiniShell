@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:39:10 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/25 16:19:27 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 19:27:21 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*find_path(void)
 	t_env_node	*find;
 
 	find = search_node_by_key(g_global_var.envp_head, "PATH");
+	if (find == NULL)
+		return (NULL);
 	return (ft_strdup(find->value));
 }
 

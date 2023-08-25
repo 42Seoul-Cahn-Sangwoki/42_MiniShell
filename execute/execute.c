@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:26:47 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/24 22:12:38 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:24:07 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int	one_argument_processing(t_node *cmds)
 	path = find_path();
 	if (access(cmds->commands[0], X_OK))
 	{
+		if (path == NULL)
+			return (set_exit_status(127, ft_strdup(cmds->commands[0]), \
+			"command not found"));
 		if (!is_valid_execute_file(cmds->commands[0], path))
 		{
 			free(path);

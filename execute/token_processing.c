@@ -6,7 +6,7 @@
 /*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:44:15 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/24 18:13:01 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 19:20:41 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	token_processing(t_node *token, int **pipe, int index, int length)
 	path = find_path();
 	if (access(token->commands[0], X_OK))
 	{
-		if (!find_execute_file(token->commands, path))
+		if (path == NULL || !find_execute_file(token->commands, path))
 		{
 			set_exit_status(127, ft_strdup(token->commands[0]), \
 					"command not found");

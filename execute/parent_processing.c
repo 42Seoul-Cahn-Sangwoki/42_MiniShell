@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parent_processing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/25 16:09:49 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:50:21 by cahn             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 {
 	int	i;
 
+	execute_parent_signal();
 	i = 0;
 	while (i < length - 1)
 	{
@@ -109,7 +110,6 @@ void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 		++i;
 	}
 	free(pm->pipe_array);
-	execute_parent_signal();
 	wait_all_pid(pm, cmds, length);
 	delete_tmp_file(cmds, length);
 }

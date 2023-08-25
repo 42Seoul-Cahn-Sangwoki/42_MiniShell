@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:54:34 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/23 18:55:50 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:55:51 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	exclude_whitespace(char *str, int is_whitespace, int s_idx)
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 			break ;
+		if (str[i] == '<' || str[i] == '>')
+			return (i);
 		i++;
 	}
 	while (str[i] && (str[i] == '\'' || str[i] == '\"'))
@@ -32,7 +34,7 @@ int	exclude_whitespace(char *str, int is_whitespace, int s_idx)
 	return (exclude_whitespace(str, is_whitespace, i));
 }
 
-size_t	mk_branch_group(char *str, int is_white, int is_quote)
+size_t	mk_branch_group(char *str, int is_white)
 {
 	size_t	i;
 	size_t	mark;
@@ -40,16 +42,19 @@ size_t	mk_branch_group(char *str, int is_white, int is_quote)
 
 	rank = 0;
 	i = 0;
-	is_quote = 0;
 	if (is_white && str[0] != ' ' && !(9 <= str[0] && str[0] <= 13))
 	{
-		i = exclude_whitespace(str, is_white, 0);
+		i = exclue_redirect(str, 0);
+		if (i == 0)
+			i = exclude_whitespace(str, is_white, 0);
 		rank++;
 	}
 	while (str[i])
 	{
 		mark = i;
-		i = exclude_whitespace(str, is_white, i);
+		i = exclue_redirect(str, i);
+		if (mark == i)
+			i = exclude_whitespace(str, is_white, i);
 		if (i != mark)
 			rank++;
 		else
@@ -88,7 +93,9 @@ size_t	mk_tree_group(char *str, int flag, size_t size, char **branch)
 	while (j < size)
 	{
 		mark = i;
-		i = exclude_whitespace(str, (flag & 3), i);
+		i = exclue_redirect(str, i);
+		if (mark == i)
+			i = exclude_whitespace(str, (flag & 3), i);
 		if (mark != i)
 		{
 			branch[j] = mk_leaf_group(&str[mark], i - mark);
@@ -110,7 +117,7 @@ char	**ft_split_group(char *s, int is_whitespace, int is_quote)
 
 	size = 0;
 	if (s)
-		size = mk_branch_group(s, is_whitespace, is_quote);
+		size = mk_branch_group(s, is_whitespace);
 	branch = 0;
 	branch = (char **)malloc(sizeof(char *) * (size + 1));
 	if (! branch)
