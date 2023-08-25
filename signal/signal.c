@@ -6,7 +6,7 @@
 /*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 11:48:37 by sangwoki          #+#    #+#             */
-/*   Updated: 2023/08/22 12:09:50 by sangwoki         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:58:50 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ void	execute_parent_hanlder(int signum)
 	if (signum == SIGINT)
 	{
 		ft_putchar_fd('\n', STDOUT_FILENO);
-		g_global_var.exit = (128 | signum % 256);
 	}
 	else if (signum == SIGQUIT)
 	{
 		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
-		g_global_var.exit = (128 | signum % 256);
 	}
 }
 

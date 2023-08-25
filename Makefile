@@ -6,12 +6,12 @@
 #    By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/30 11:48:36 by sangwoki          #+#    #+#              #
-#    Updated: 2023/08/24 22:14:09 by sangwoki         ###   ########.fr        #
+#    Updated: 2023/08/25 14:42:21 by sangwoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -fsanitize=address
 LINKING_FLAGS = -lreadline -L${HOME}/.brew/opt/readline/lib
 COMPILE_FLAGS = -I${HOME}/.brew/opt/readline/include
 NAME = minishell

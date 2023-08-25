@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parent_processing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cahn <cahn@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sangwoki <sangwoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:42:27 by cahn              #+#    #+#             */
-/*   Updated: 2023/08/24 21:26:07 by cahn             ###   ########.fr       */
+/*   Updated: 2023/08/25 16:09:49 by sangwoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,15 @@ void	wait_all_pid(t_process_manage *pm, t_node *cmds, int length)
 		}
 		waitpid(pm->child_pid_array[i++], &stat, 0);
 	}
-	set_exit_status(stat >> 8, NULL, NULL);
+	if (stat == 2 || stat == 3)
+		stat = (128 | stat);
+	else
+		stat = (stat >> 8);
+	set_exit_status(stat, NULL, NULL);
 	free(pm->child_pid_array);
 }
+
+// exit code는 g_global_var.exit = (status >> 8)이고 signal은 (128 | status)임
 
 void	parent_processing(t_process_manage *pm, t_node *cmds, int length)
 {
