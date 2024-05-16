@@ -10,7 +10,7 @@ Bash-like shell 구현하기
 2. 상대 경로, 절대 경로를 기반으로 검색하고 실행해야 한다.
 3. built-in 함수: echo -n, cd, pwd, export, unset, env, exit, redirections, pipelines 등
 4. $?을 검색했을 때, 최근 실행된 프로세스의 종료 상태가 출력된다.
-5. shell에서 SIGINT(ctrl-c), EOF(ctrl-D), SIGQUIT(ctrl-\)가 작동되어야 한다.
+5. shell에서 SIGINT(ctrl-c), EOF(ctrl-D), SIGQUIT(ctrl-\\)가 작동되어야 한다.
 
 # 실행 내용
 ```
